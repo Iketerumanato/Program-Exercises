@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Resource/Script/Editor/EditorWindowTest.uss?fileID=7433441132597879392&amp;guid=7174590c2558ea84bbca8c0e7519cc41&amp;type=3#EditorWindowTest" />
+    <ui:Label text="コピー元" display-tooltip-when-elided="true" />
+    <uie:ObjectField label="01" allow-scene-objects="true" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="moto1_obj" style="align-items: center; justify-content: flex-end;" />
+    <ui:Label text="コピー先" display-tooltip-when-elided="true" />
+    <uie:ObjectField label="01" allow-scene-objects="true" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="saki1_obj" style="height: 17px;" />
+    <uie:ObjectField label="02" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="saki2_obj" />
+    <uie:ObjectField label="03" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="saki3_obj" />
+    <ui:Button text="コピー実行" display-tooltip-when-elided="true" name="copy_btn" />
+</ui:UXML>
