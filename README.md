@@ -30,3 +30,5 @@ https://github.com/user-attachments/assets/279d6ccd-c12f-441e-8b12-d932ef865e6c
 5,Strategy
 
 https://github.com/user-attachments/assets/8dd466ae-be4b-411b-a8af-c16cf35ed124
+
+思いついたら追加予定
