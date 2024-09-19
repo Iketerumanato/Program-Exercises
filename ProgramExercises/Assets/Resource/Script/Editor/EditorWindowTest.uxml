@@ -3,6 +3,8 @@
     <ui:Label text="コピー元" display-tooltip-when-elided="true" />
     <uie:ObjectField label="01" allow-scene-objects="true" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="moto1_obj" style="align-items: center; justify-content: flex-end;" />
     <ui:Label text="コピー先" display-tooltip-when-elided="true" />
-    <ui:ListView name="ObjectList" binding-path="Objects" fixed-item-height="30" virtualization-method="DynamicHeight" show-border="true" header-title="Objects" show-add-remove-footer="true" style="height: 47px;" />
+    <uie:ObjectField label="01" allow-scene-objects="true" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="saki1_obj" style="align-items: center; justify-content: flex-end;" />
+    <uie:ObjectField label="02" allow-scene-objects="true" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="saki2_obj" style="align-items: center; justify-content: flex-end;" />
+    <uie:ObjectField label="03" allow-scene-objects="true" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="saki3_obj" style="align-items: center; justify-content: flex-end;" />
     <ui:Button text="コピー実行" display-tooltip-when-elided="true" name="copy_btn" />
 </ui:UXML>
