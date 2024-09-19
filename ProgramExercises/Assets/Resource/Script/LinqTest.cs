@@ -29,7 +29,7 @@ public class LinqTest : MonoBehaviour
             .Where(l => l >= 4);
         foreach (int result in linqResult)
         {
-            Debug.Log(result.ToString());
+            Debug.Log(result);
         }
     }
 }

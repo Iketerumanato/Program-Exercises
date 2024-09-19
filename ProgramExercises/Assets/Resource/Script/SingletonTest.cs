@@ -15,7 +15,11 @@ public class Singleton
 
     public void WriteTest()
     {
-        Debug.Log("Use SingletonPattern");
+        Debug.Log("SingletonPatternégópíÜ");
+    }
+    public void WriteNotes()
+    {
+        Debug.LogWarning("égÇ¢âﬂÇ¨Ç…ÇÕíçà”!");
     }
 }
 
@@ -25,5 +29,6 @@ public class SingletonTest : MonoBehaviour
     void Start()
     {
         Singleton.Instance.WriteTest();
+        Singleton.Instance.WriteNotes();
     }
 }

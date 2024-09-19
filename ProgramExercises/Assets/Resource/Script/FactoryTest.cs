@@ -25,7 +25,7 @@ public class Slime : Monster
 
     public override void ExplanationMyself()
     {
-        Debug.Log($"My name is {Name} : Hp = {Hp} : Smoothness is {Smoothness}");
+        Debug.Log($"僕の名前は {Name} : Hpは = {Hp} : 滑らかさは {Smoothness} だよ！");
     }
 }
 
@@ -40,7 +40,7 @@ public class Dragon : Monster
 
     public override void ExplanationMyself()
     {
-        Debug.Log($"My name is {Name} : Hp = {Hp} : ScalesNum is {ScalesNum}");
+        Debug.Log($"俺の名前は {Name} : Hpは = {Hp} : 鱗の数は {ScalesNum} だ！");
     }
 }
 

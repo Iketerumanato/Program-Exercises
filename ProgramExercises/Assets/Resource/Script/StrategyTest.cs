@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public interface IStrategyWeapon
@@ -32,7 +33,7 @@ public class Hunter
 
     public void ExecuteEquipmentWeapon()
     {
-        _strategyweapon.EquipmentWeapon();
+        _strategyweapon?.EquipmentWeapon();
     }
 }
 
@@ -40,12 +41,14 @@ public class StrategyTest : MonoBehaviour
 {
     Hunter hunter = new();
 
-    // Start is called before the first frame update
-    void Start()
+    public void EquipBananaGun()
     {
         hunter.SetWeapon(new BananaGun());
         hunter.ExecuteEquipmentWeapon();
+    }
 
+    public void EquipBigMarlin()
+    {
         hunter.SetWeapon(new BigMarlin());
         hunter.ExecuteEquipmentWeapon();
     }
