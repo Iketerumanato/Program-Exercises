@@ -8,7 +8,7 @@ public class Singleton
     {
         get
         {
-            if (instance == null) instance = new Singleton();
+            instance ??= new Singleton();
             return instance;
         }
     }
