@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public class EditorWindowTest : EditorWindow
 {
 #if UNITY_EDITOR
+    private List<GameObject> copyTargets = new();
+
     [MenuItem("EditorWindowTest/オブジェクトをまとめてコピー")]
     private static void ShowWindow()
     {
@@ -20,19 +22,34 @@ public class EditorWindowTest : EditorWindow
 
     private void CreateGUI()
     {
-        _rootVisualTreeAsset.CloneTree(rootVisualElement);
-        rootVisualElement.styleSheets.Add(_rootStyleSheet);
+        var root = rootVisualElement;
 
-        var copyButton = rootVisualElement.Q<Button>("copy_btn");
+        _rootVisualTreeAsset.CloneTree(root);
+        root.styleSheets.Add(_rootStyleSheet);
+
+        var listView = root.Q<ListView>("ObjectList");
+        listView.itemsSource = copyTargets;
+
+        var addButton = root.Q<Button>("unity-list-vie__add-button");
+        addButton.clicked += () =>
+        {
+            GameObject newObject = new();
+            copyTargets.Add(newObject);
+            listView.Rebuild();
+        };
+
+        var copyButton = root.Q<Button>("copy_btn");
         copyButton.clicked += () =>
         {
-            var moto1 = (GameObject)rootVisualElement.Q<ObjectField>("moto1_obj").value;
-            var saki1 = (GameObject)rootVisualElement.Q<ObjectField>("saki1_obj").value;
-            var saki2 = (GameObject)rootVisualElement.Q<ObjectField>("saki2_obj").value;
-            var saki3 = (GameObject)rootVisualElement.Q<ObjectField>("saki3_obj").value;
-            saki1.GetComponent<Renderer>().sharedMaterial = moto1.GetComponent<Renderer>().sharedMaterial;
-            saki2.GetComponent<Renderer>().sharedMaterial = moto1.GetComponent<Renderer>().sharedMaterial;
-            saki3.GetComponent<Renderer>().sharedMaterial = moto1.GetComponent<Renderer>().sharedMaterial;
+            var moto = (GameObject)root.Q<ObjectField>("moto_obj").value;
+
+            foreach (var target in copyTargets)
+            {
+                if (target != null)
+                {
+                    target.GetComponent<Renderer>().sharedMaterial = moto.GetComponent<Renderer>().sharedMaterial;
+                }
+            }
         };
     }
 #endif
