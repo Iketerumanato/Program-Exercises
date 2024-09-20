@@ -6,7 +6,7 @@
 
 01 元のオブジェクトのマテリアルを他のオブジェクトのマテリアルに反映<エディタ拡張>
 
-[ProgramExercises/Assets/Resource/Script/Editor/EdiWindowTest.cs](url)
+[ProgramExercises/Assets/Resource/Script/Editor/EditorWindowTest.cs](url)
 
 https://github.com/user-attachments/assets/5d1f5a79-f7d1-4c28-ab7e-edb5515bd432
 
