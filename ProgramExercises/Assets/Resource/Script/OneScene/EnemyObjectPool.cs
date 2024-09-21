@@ -1,22 +1,22 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class EnemyObjectsPool : MonoBehaviour
+public class EnemyObjectPool : MonoBehaviour
 {  
-    [SerializeField] private EnemyObjects _enemyPrefab;  // オブジェクトプールで管理するオブジェクト
-    private ObjectPool<EnemyObjects> _enemyPool;  // オブジェクトプール本体
+    [SerializeField] private EnemyObject _enemyPrefab;  // オブジェクトプールで管理するオブジェクト
+    private ObjectPool<EnemyObject> _enemyPool;  // オブジェクトプール本体
 
     // アクセスしやすいようにシングルトン化
-    private static EnemyObjectsPool _instance;
+    private static EnemyObjectPool _instance;
 
     [System.Obsolete]
-    public static EnemyObjectsPool Instance
+    public static EnemyObjectPool Instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = FindObjectOfType<EnemyObjectsPool>();
+                _instance = FindObjectOfType<EnemyObjectPool>();
             }
 
             return _instance;
@@ -25,7 +25,7 @@ public class EnemyObjectsPool : MonoBehaviour
 
     private void Start()
     {
-        _enemyPool = new ObjectPool<EnemyObjects>(
+        _enemyPool = new ObjectPool<EnemyObject>(
             createFunc: () => OnCreateObject(),
             actionOnGet: (obj) => OnGetObject(obj),
             actionOnRelease: (obj) => OnReleaseObject(obj),
@@ -37,7 +37,7 @@ public class EnemyObjectsPool : MonoBehaviour
     }
 
     // プールからオブジェクトを取得する
-    public EnemyObjects GetEnemy()
+    public EnemyObject GetEnemy()
     {
         return _enemyPool.Get();
     }
@@ -49,13 +49,13 @@ public class EnemyObjectsPool : MonoBehaviour
     }
 
     // プールに入れるインスタンスを新しく生成する際に行う処理
-    private EnemyObjects OnCreateObject()
+    private EnemyObject OnCreateObject()
     {
         return Instantiate(_enemyPrefab, transform);
     }
 
     // プールからインスタンスを取得した際に行う処理
-    private void OnGetObject(EnemyObjects enemyObject)
+    private void OnGetObject(EnemyObject enemyObject)
     {
         enemyObject.transform.position = Random.insideUnitSphere * 5;
         enemyObject.Initialize(() => _enemyPool.Release(enemyObject));
@@ -63,13 +63,13 @@ public class EnemyObjectsPool : MonoBehaviour
     }
 
     // プールにインスタンスを返却した際に行う処理
-    private void OnReleaseObject(EnemyObjects enemyObject)
+    private void OnReleaseObject(EnemyObject enemyObject)
     {
         Debug.Log("Release");  // EnemyObject側で非アクティブにするのでログ出力のみ。ここで非アクティブにするパターンもある。
     }
 
     // プールから削除される際に行う処理
-    private void OnDestroyObject(EnemyObjects enemyObject)
+    private void OnDestroyObject(EnemyObject enemyObject)
     {
         Destroy(enemyObject.gameObject);
     }

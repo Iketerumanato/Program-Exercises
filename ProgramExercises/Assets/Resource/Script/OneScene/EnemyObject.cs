@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class EnemyObjects : MonoBehaviour
+public class EnemyObject : MonoBehaviour
 {
     private Action _onDisable;  // 非アクティブ化するためのコールバック
     private float _elapsedTime;  // 初期化されてからの経過時間
