@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class ObjectPoolButton : MonoBehaviour
 {
+    [SerializeField] EnemyObjectPool _enemyObjectPool;
+
     public void Create()
     {
-        EnemyObjectPool.Instance.GetEnemy();
+        _enemyObjectPool.GetEnemy();
     }
 
     public void Clear()
     {
-        EnemyObjectPool.Instance.ClearEnemy();
+        _enemyObjectPool.ClearEnemy();
     }
 }
