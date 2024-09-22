@@ -302,7 +302,6 @@ GameObject:
   - component: {fileID: 267810200}
   - component: {fileID: 267810199}
   - component: {fileID: 267810198}
-  - component: {fileID: 267810197}
   m_Layer: 5
   m_Name: ClearButton
   m_TagString: Untagged
@@ -330,18 +329,6 @@ RectTransform:
   m_AnchoredPosition: {x: -255, y: 119}
   m_SizeDelta: {x: 225.6903, y: 95.6902}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &267810197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267810195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93838767e1a25d439f5883fce2a82cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &267810198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,19 +372,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 267810199}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 267810197}
-        m_TargetAssemblyTypeName: ObjectsPoolButton, Assembly-CSharp
-        m_MethodName: Clear
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &267810199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,7 +692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1049547132}
-  - component: {fileID: 1049547131}
+  - component: {fileID: 1049547133}
   m_Layer: 0
   m_Name: EnemyObjectsPool
   m_TagString: Untagged
@@ -725,19 +700,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1049547131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1049547130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb718985a7e076a4381848e9de9fad3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 994883428674379245, guid: cd926354108610b4ba653dbe33b641d3, type: 3}
 --- !u!4 &1049547132
 Transform:
   m_ObjectHideFlags: 0
@@ -753,6 +715,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1049547133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049547130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb718985a7e076a4381848e9de9fad3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 994883428674379245, guid: cd926354108610b4ba653dbe33b641d3, type: 3}
+  CreateObjButton: {fileID: 1838068007}
+  ClearObjButton: {fileID: 267810198}
 --- !u!1 &1104723632
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,7 +835,6 @@ GameObject:
   - component: {fileID: 1838068009}
   - component: {fileID: 1838068008}
   - component: {fileID: 1838068007}
-  - component: {fileID: 1838068006}
   m_Layer: 5
   m_Name: CreateButton
   m_TagString: Untagged
@@ -886,18 +862,6 @@ RectTransform:
   m_AnchoredPosition: {x: -255, y: 242}
   m_SizeDelta: {x: 225.6903, y: 95.6902}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1838068006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1838068004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93838767e1a25d439f5883fce2a82cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1838068007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,19 +905,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1838068008}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1838068006}
-        m_TargetAssemblyTypeName: ObjectsPoolButton, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1838068008
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UI;
 
 public class EnemyObjectPool : MonoBehaviour
 {
     [SerializeField] EnemyObject _enemyPrefab;  // オブジェクトプールで管理するオブジェクト
     private ObjectPool<EnemyObject> _enemyPool;  // オブジェクトプール本体
+
+    [SerializeField] Button CreateObjButton;
+    [SerializeField] Button ClearObjButton;
 
     private void Start()
     {
@@ -15,12 +19,15 @@ public class EnemyObjectPool : MonoBehaviour
             collectionCheck: true,
             defaultCapacity: 3,
             maxSize: 10); ;
+
+        CreateObjButton.onClick.AddListener(GetEnemy);
+        ClearObjButton.onClick.AddListener(ClearEnemy);
     }
 
     // プールからオブジェクトを取得する
-    public EnemyObject GetEnemy()
+    public void GetEnemy()
     {
-        return _enemyPool.Get();
+        _enemyPool.Get();
     }
 
     // プールの中身を空にする

@@ -3,8 +3,8 @@ using System;
 
 public class EnemyObject : MonoBehaviour
 {
-    private Action _onDisable;  // 非アクティブ化するためのコールバック
-    private float _elapsedTime;  // 初期化されてからの経過時間
+    private Action _onDisable;
+    private float _elapsedTime;
 
     public void Initialize(Action onDisable)
     {
