@@ -46,6 +46,10 @@ https://github.com/user-attachments/assets/279d6ccd-c12f-441e-8b12-d932ef865e6c
 
 https://github.com/user-attachments/assets/8dd466ae-be4b-411b-a8af-c16cf35ed124
 
+**ObjectPoolの使用**
 
+https://github.com/user-attachments/assets/472a6f9d-5e84-4450-886b-1e5e5d6c15da
+
+[参考URL](https://huchat-gamedev.net/explanation-object-pool/)
 
 思いついたら追加予定
