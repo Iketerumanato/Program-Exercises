@@ -58,5 +58,6 @@ csvからパターンのデータを読み込んで文字を表示
 
 https://github.com/user-attachments/assets/4cb2666e-f0e4-40f0-ba30-d863bca4fe69
 
+※各処理を別々のスクリプトで分ける予定
 
 思いついたら追加予定
