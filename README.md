@@ -52,4 +52,11 @@ https://github.com/user-attachments/assets/472a6f9d-5e84-4450-886b-1e5e5d6c15da
 
 [参考URL](https://huchat-gamedev.net/explanation-object-pool/)
 
+**モールス信号**
+
+csvからパターンのデータを読み込んで文字を表示
+
+https://github.com/user-attachments/assets/4cb2666e-f0e4-40f0-ba30-d863bca4fe69
+
+
 思いついたら追加予定
