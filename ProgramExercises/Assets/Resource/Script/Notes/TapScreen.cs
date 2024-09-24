@@ -47,7 +47,6 @@ public class TapScreen : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         try
         {
-            // CSVファイルを一行ずつ読み込み
             foreach (var line in File.ReadLines(csvFilePath))
             {
                 var values = line.Split(',');
@@ -84,7 +83,7 @@ public class TapScreen : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
     }
 
-    //入力したモールス信号を判定
+    //入力したモールス信号の判定
     public void ConfirmMorseSignal()
     {
         if (morseCodeDictionary.ContainsKey(MorseSignal))
