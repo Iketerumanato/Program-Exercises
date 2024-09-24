@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.Collections.Generic;
-using System.IO;
 
 public class TapScreen : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 { 
@@ -17,9 +16,7 @@ public class TapScreen : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField,Range(0f,1f)]
     float threshold = 0.5f;
 
-    // CSVファイルのパス (Assetsフォルダなどに配置)
-    public string csvFilePath = "Assets/Resource/Data/MorseCode.csv";
-
+    [SerializeField] TextAsset csvMorseFile;
     private Dictionary<string, char> morseCodeDictionary = new();
 
     private void Start()
@@ -45,9 +42,10 @@ public class TapScreen : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     void LoadMorseCodeFromCSV()
     {
-        try
+        if (csvMorseFile != null)
         {
-            foreach (var line in File.ReadLines(csvFilePath))
+            var lines = csvMorseFile.text.Split('\n');
+            foreach (var line in lines)
             {
                 var values = line.Split(',');
                 if (values.Length == 2)
@@ -57,12 +55,9 @@ public class TapScreen : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                     morseCodeDictionary[morseCode] = letter;
                 }
             }
-            Debug.Log("CSVからモールス信号を読み込みました");
+            Debug.Log($"CSVデ－タ {csvMorseFile.name} を読み込みました");
         }
-        catch (System.Exception e)
-        {
-            Debug.LogError("CSVの読み込みに失敗しました: " + e.Message);
-        }
+        else Debug.LogError("CSVデータがアサインされていません");
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -97,6 +92,11 @@ public class TapScreen : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             Debug.LogError("無効なモールス信号です");
         }
 
+        ResetMorse();
+    }
+
+    void ResetMorse()
+    {
         // モールス信号をリセット
         MorseSignal = "";
         displayText.text = MorseSignal;

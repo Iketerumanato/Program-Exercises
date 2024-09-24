@@ -455,7 +455,7 @@ MonoBehaviour:
   displayText: {fileID: 1426917572}
   outputText: {fileID: 1948531893}
   threshold: 0.5
-  csvFilePath: Assets/Resource/Data/MorseCode.csv
+  csvMorseFile: {fileID: 4900000, guid: 986925314a56de3429d3d854f1546447, type: 3}
 --- !u!1 &354597201
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This morse is... '
+  m_text: 'Morse Output :'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
