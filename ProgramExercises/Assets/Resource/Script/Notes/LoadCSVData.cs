@@ -27,7 +27,7 @@ public class LoadCSVData
             }
             Debug.Log($"CSVデ－タ {csvData.name} を読み込みました");
         }
-        else Debug.LogError("CSVデータがアサインされていません");
+        //else Debug.LogError("CSVデータがアサインされていません");
     }
 
     // モールス信号に対応する文字を返す
