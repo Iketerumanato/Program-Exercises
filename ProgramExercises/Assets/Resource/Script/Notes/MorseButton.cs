@@ -3,18 +3,18 @@ using UnityEngine.EventSystems;
 
 public class MorseButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 {
-    public TapScreen _tapScreen;
+    [SerializeField] InputMorse _inputMorseIns;
 
-    // ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+    // ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã¨ã
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_tapScreen != null) _tapScreen.OnPointerDown();
+        if (_inputMorseIns != null) _inputMorseIns.OnPointerDown();
         
     }
 
-    // ƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½‚Æ‚«
+    // ãƒœã‚¿ãƒ³ãŒé›¢ã•ã‚ŒãŸã¨ã
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (_tapScreen != null) _tapScreen.OnPointerUp();
+        if (_inputMorseIns != null) _inputMorseIns.OnPointerUp();
     }
 }

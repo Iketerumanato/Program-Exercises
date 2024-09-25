@@ -214,7 +214,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 354597202}
+  - {fileID: 335936193}
   - {fileID: 1168227833}
   - {fileID: 1105444699}
   - {fileID: 1426917571}
@@ -504,11 +504,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1137546832}
-  m_Father: {fileID: 1948531892}
+  m_Father: {fileID: 56892094}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -278, y: -358}
+  m_AnchoredPosition: {x: -107, y: -165}
   m_SizeDelta: {x: 263.3475, y: 110.6615}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &335936194
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c499b6718e8af5f4f979ec112d34fa4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tapScreen: {fileID: 56892095}
+  _inputMorseIns: {fileID: 56892095}
 --- !u!1 &354597201
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,11 +636,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 56892094}
+  m_Father: {fileID: 1948531892}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -194, y: 193}
+  m_AnchoredPosition: {x: -365, y: 0}
   m_SizeDelta: {x: 314.6905, y: 173.7195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &354597203
@@ -1784,7 +1784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patternText: {fileID: 1948531893}
   resultText: {fileID: 1426917572}
-  _tapScreenIns: {fileID: 56892095}
+  _inputMorseIns: {fileID: 56892095}
   morsePatternCSVData: {fileID: 4900000, guid: 0ace68ecc45ae584cbddda1cbbc63100, type: 3}
 --- !u!4 &1846256857
 Transform:
@@ -1831,7 +1831,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 335936193}
+  - {fileID: 354597202}
   m_Father: {fileID: 56892094}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

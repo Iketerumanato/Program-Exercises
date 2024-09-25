@@ -5,7 +5,7 @@ public class JudgeNotes : MonoBehaviour
 {
     [SerializeField] TMP_Text patternText;
     [SerializeField] TMP_Text resultText;
-    [SerializeField] TapScreen _tapScreenIns;
+    [SerializeField] InputMorse _inputMorseIns;
 
     LoadMorsePattaernData _loadmorsePatternIns;
     [SerializeField] TextAsset morsePatternCSVData;
@@ -25,7 +25,7 @@ public class JudgeNotes : MonoBehaviour
     void Update()
     {
         // TapScreen から現在のモールス入力を取得
-        currentInputPattern = _tapScreenIns.CurrentMorseSignal;
+        currentInputPattern = _inputMorseIns.CurrentMorseSignal;
 
         if (currentInputPattern.Length == targetMorsePattern.Length)
         {
@@ -48,7 +48,7 @@ public class JudgeNotes : MonoBehaviour
     //リセットし、もう一度
     public void InitializationPattern()
     {
-        _tapScreenIns.ClearSignal();
+        _inputMorseIns.ClearSignal();
         targetMorsePattern = _loadmorsePatternIns.GetRandomMorsePattern();
         patternText.text = targetMorsePattern;
         resultText.text = "";

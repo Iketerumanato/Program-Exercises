@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class TapScreen : MonoBehaviour
+public class InputMorse : MonoBehaviour
 { 
     [SerializeField] TMP_Text displayText;
     [SerializeField] TMP_Text outputText;
