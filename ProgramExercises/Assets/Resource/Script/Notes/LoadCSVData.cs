@@ -25,12 +25,12 @@ public class LoadCSVData
                     morseCodeDictionary[morseCode] = letter;
                 }
             }
-            Debug.Log($"CSV�f�|�^ {csvData.name} ��ǂݍ��݂܂���");
+            Debug.Log($"CSVデ－タ {csvData.name} を読み込みました");
         }
-        else Debug.LogError("CSV�f�[�^���A�T�C������Ă��܂���");
+        else Debug.LogError("CSVデータがアサインされていません");
     }
 
-    // ���[���X�M���ɑΉ����镶����Ԃ�
+    // モールス信号に対応する文字を返す
     public char? GetLetterFromMorseCode(string morseCode)
     {
         if (morseCodeDictionary.ContainsKey(morseCode)) return morseCodeDictionary[morseCode];

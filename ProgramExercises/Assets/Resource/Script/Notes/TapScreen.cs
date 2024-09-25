@@ -17,6 +17,11 @@ public class TapScreen : MonoBehaviour
     [SerializeField] TextAsset MorseCSVData;
     private LoadCSVData _loadCsvDataIns;
 
+    public string CurrentMorseSignal
+    {
+        get { return MorseSignal; }
+    }
+
     private void Start()
     {
         _loadCsvDataIns = new(MorseCSVData);
@@ -38,7 +43,7 @@ public class TapScreen : MonoBehaviour
         }
     }
 
-    #region ƒ{ƒ^ƒ“‚Ìˆ—ŒQ
+    #region ãƒœã‚¿ãƒ³ã®å‡¦ç†ç¾¤
 
     public void OnPointerDown()
     {
@@ -58,7 +63,7 @@ public class TapScreen : MonoBehaviour
         }
     }
 
-    //“ü—Í‚µ‚½ƒ‚[ƒ‹ƒXM†‚Ì”»’è
+    //å…¥åŠ›ã—ãŸãƒ¢ãƒ¼ãƒ«ã‚¹ä¿¡å·ã®åˆ¤å®š
     public void ConfirmMorseSignal()
     {
         var letter = _loadCsvDataIns.GetLetterFromMorseCode(MorseSignal);
@@ -68,7 +73,7 @@ public class TapScreen : MonoBehaviour
             Outputstr += letter;
             outputText.text = Outputstr;
         }
-        else Debug.LogError("–³Œø‚Èƒ‚[ƒ‹ƒXM†‚Å‚·");
+        else Debug.LogError("ç„¡åŠ¹ãªãƒ¢ãƒ¼ãƒ«ã‚¹ä¿¡å·ã§ã™");
 
         ResetMorse();
     }
