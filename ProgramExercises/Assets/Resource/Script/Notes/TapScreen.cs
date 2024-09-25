@@ -38,6 +38,8 @@ public class TapScreen : MonoBehaviour
         }
     }
 
+    #region ƒ{ƒ^ƒ“‚Ìˆ—ŒQ
+
     public void OnPointerDown()
     {
         isPressing = true;
@@ -84,4 +86,5 @@ public class TapScreen : MonoBehaviour
         displayText.text = MorseSignal;
         outputText.text = Outputstr;
     }
+    #endregion
 }
