@@ -5,7 +5,8 @@ public class InputMorse : MonoBehaviour
 { 
     [SerializeField] TMP_Text displayText;
     [SerializeField] TMP_Text outputText;
-    private float pressTime = 0.0f;
+    private float pressTime = 0f;
+    const float InitialPressTime = 0f;
     private bool isPressing = false;
     private bool dashDisplayed = false;
     private string MorseSignal = "";
@@ -17,6 +18,8 @@ public class InputMorse : MonoBehaviour
     [SerializeField] TextAsset MorseCSVData;
     private LoadCSVData _loadCsvDataIns;
 
+    [SerializeField] bool IsLoadData = false;
+
     public string CurrentMorseSignal
     {
         get { return MorseSignal; }
@@ -24,7 +27,7 @@ public class InputMorse : MonoBehaviour
 
     private void Start()
     {
-        _loadCsvDataIns = new(MorseCSVData);
+        if(IsLoadData) _loadCsvDataIns = new(MorseCSVData,true);
     }
 
     void Update()
@@ -38,7 +41,7 @@ public class InputMorse : MonoBehaviour
                 MorseSignal += "-";
                 displayText.text = MorseSignal;
                 dashDisplayed = true;
-                pressTime = 0.0f;
+                pressTime = InitialPressTime;
             }
         }
     }
@@ -48,7 +51,7 @@ public class InputMorse : MonoBehaviour
     public void OnPointerDown()
     {
         isPressing = true;
-        pressTime = 0.0f;
+        pressTime = InitialPressTime;
         dashDisplayed = false;
     }
 

@@ -7,7 +7,7 @@ public class JudgeNotes : MonoBehaviour
     [SerializeField] TMP_Text resultText;
     [SerializeField] InputMorse _inputMorseIns;
 
-    LoadMorsePattaernData _loadmorsePatternIns;
+    LoadCSVData _loadmorsePatternIns;
     [SerializeField] TextAsset morsePatternCSVData;
 
     private string targetMorsePattern = "";
@@ -16,7 +16,7 @@ public class JudgeNotes : MonoBehaviour
     void Start()
     {
         // ランダムにモールスパターンを選出
-        _loadmorsePatternIns = new LoadMorsePattaernData(morsePatternCSVData);
+        _loadmorsePatternIns = new LoadCSVData(morsePatternCSVData,false);
         targetMorsePattern = _loadmorsePatternIns.GetRandomMorsePattern();
         patternText.text = targetMorsePattern;
         resultText.text = "";
@@ -36,13 +36,7 @@ public class JudgeNotes : MonoBehaviour
     void CheckMorsePattern()
     {
         if (currentInputPattern == targetMorsePattern) resultText.text = "Success!";
-
         else resultText.text = "Failure...";
-
-        // 次のパターンを選出してリセット
-        currentInputPattern = "";
-        targetMorsePattern = "random pattern";  // ここにランダムパターンの取得処理
-        patternText.text = targetMorsePattern;
     }
 
     //リセットし、もう一度
