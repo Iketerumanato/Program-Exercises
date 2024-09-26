@@ -844,7 +844,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 56892096}
         m_TargetAssemblyTypeName: JudgeNotes, Assembly-CSharp
         m_MethodName: InitializationPattern
         m_Mode: 1
