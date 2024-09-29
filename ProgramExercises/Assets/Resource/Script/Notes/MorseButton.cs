@@ -8,8 +8,7 @@ public class MorseButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
     // ボタンが押されたとき
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_inputMorseIns != null) _inputMorseIns.OnPointerDown();
-        
+        if (_inputMorseIns != null) _inputMorseIns.OnPointerDown();    
     }
 
     // ボタンが離されたとき

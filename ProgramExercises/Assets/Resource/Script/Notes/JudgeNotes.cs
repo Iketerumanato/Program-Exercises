@@ -25,7 +25,6 @@ public class JudgeNotes : MonoBehaviour
     {
         // TapScreen から現在のモールス入力を取得
         currentInputPattern = _inputMorseIns.CurrentMorseSignal;
-
         if (currentInputPattern.Length == targetMorsePattern.Length) CheckMorsePattern();
     }
 

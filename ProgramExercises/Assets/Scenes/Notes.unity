@@ -242,7 +242,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayText: {fileID: 1426917572}
   outputText: {fileID: 1948531893}
-  threshold: 0.5
+  thresholdTime: 0.5
+  pressSpeed: 0.01
   MorseCSVData: {fileID: 4900000, guid: 986925314a56de3429d3d854f1546447, type: 3}
   IsLoadData: 1
 --- !u!114 &56892096
