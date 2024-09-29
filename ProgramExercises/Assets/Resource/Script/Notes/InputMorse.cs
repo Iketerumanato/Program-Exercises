@@ -1,4 +1,7 @@
 using UnityEngine;
+using System;
+using UniRx;
+using System.Linq;
 using TMPro;
 
 public class InputMorse : MonoBehaviour
@@ -7,13 +10,11 @@ public class InputMorse : MonoBehaviour
     [SerializeField] TMP_Text outputText;
     private float pressTime = 0f;
     const float InitialPressTime = 0f;
-    private bool isPressing = false;
-    private bool dashDisplayed = false;
     private string MorseSignal = "";
     private string Outputstr = "";
 
     [SerializeField,Range(0f,1f)]
-    float threshold = 0.5f;
+    float thresholdTime = 0.5f;
 
     [SerializeField] TextAsset MorseCSVData;
     private LoadCSVData _loadCsvDataIns;
@@ -25,45 +26,50 @@ public class InputMorse : MonoBehaviour
         get { return MorseSignal; }
     }
 
+    private Subject<Unit> onPointerDownSubject = new();
+    private Subject<Unit> onPointerUpSubject = new();
+
     private void Start()
     {
         if(IsLoadData) _loadCsvDataIns = new(MorseCSVData,true);
-    }
 
-    void Update()
-    {
-        if (isPressing)
-        {
-            pressTime += Time.deltaTime;
-
-            if (pressTime >= threshold && !dashDisplayed)
+        var pressDurationObservable = onPointerDownSubject
+            .SelectMany(_ =>
+                Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(0.01f))
+                    .Select(time => time * 0.01f)
+                    .TakeUntil(onPointerUpSubject)
+            )
+            .Subscribe(time =>
             {
-                MorseSignal += "-";
+                pressTime = (float)time;
+
+                if (pressTime >= thresholdTime && MorseSignal.LastOrDefault() != '-')
+                {
+                    MorseSignal += "-";
+                    displayText.text = MorseSignal;
+                    pressTime = InitialPressTime;
+                }
+            });
+
+        onPointerUpSubject
+            .Where(_ => pressTime < thresholdTime)
+            .Subscribe(_ =>
+            {
+                MorseSignal += ".";
                 displayText.text = MorseSignal;
-                dashDisplayed = true;
-                pressTime = InitialPressTime;
-            }
-        }
+            });
     }
 
     #region ボタンの処理群
 
     public void OnPointerDown()
     {
-        isPressing = true;
-        pressTime = InitialPressTime;
-        dashDisplayed = false;
+        onPointerDownSubject.OnNext(Unit.Default);
     }
 
     public void OnPointerUp()
     {
-        isPressing = false;
-
-        if (!dashDisplayed)
-        {
-            MorseSignal += ".";
-            displayText.text = MorseSignal;
-        }
+        onPointerUpSubject.OnNext(Unit.Default);
     }
 
     //入力したモールス信号の判定

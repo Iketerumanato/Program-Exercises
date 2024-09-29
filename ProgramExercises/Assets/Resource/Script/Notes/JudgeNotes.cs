@@ -15,7 +15,6 @@ public class JudgeNotes : MonoBehaviour
 
     void Start()
     {
-        // ランダムにモールスパターンを選出
         _loadmorsePatternIns = new LoadCSVData(morsePatternCSVData,false);
         targetMorsePattern = _loadmorsePatternIns.GetRandomMorsePattern();
         patternText.text = targetMorsePattern;
@@ -27,12 +26,10 @@ public class JudgeNotes : MonoBehaviour
         // TapScreen から現在のモールス入力を取得
         currentInputPattern = _inputMorseIns.CurrentMorseSignal;
 
-        if (currentInputPattern.Length == targetMorsePattern.Length)
-        {
-            CheckMorsePattern();
-        }
+        if (currentInputPattern.Length == targetMorsePattern.Length) CheckMorsePattern();
     }
 
+    //成功か失敗かの判定
     void CheckMorsePattern()
     {
         if (currentInputPattern == targetMorsePattern) resultText.text = "Success!";
