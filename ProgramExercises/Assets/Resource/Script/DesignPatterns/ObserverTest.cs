@@ -10,7 +10,7 @@ public class PlayerHealthUI : IPlayerHpObserver
 {
     public void OnUpdateHp(int updatePlayerHp)
     {
-        Debug.Log($"Player‚ÌHp‚ğ {updatePlayerHp} ‚ÉXV‚µ‚Ü‚·");
+        Debug.Log($"Playerã®Hpã‚’ {updatePlayerHp} ã«æ›´æ–°ã—ã¾ã™");
     }
 }
 
