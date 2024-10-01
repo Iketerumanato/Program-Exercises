@@ -70,4 +70,8 @@ https://github.com/user-attachments/assets/4cb2666e-f0e4-40f0-ba30-d863bca4fe69
 
 https://github.com/user-attachments/assets/60bde784-7b37-4c5a-bf49-dd4914a565f4
 
+**画像の読み込み->キャラクターの移動の流れ**
+
+https://github.com/user-attachments/assets/f94c47eb-ca1d-40df-bb97-606d1107385f
+
 思いついたら追加予定
