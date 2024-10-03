@@ -1,9 +1,11 @@
 using TMPro;
 using UnityEngine;
+using System.Threading.Tasks;
+using System.Threading;
 
 public class WaveText : MonoBehaviour
 {
-    TextMeshProUGUI TestText;
+    TMP_Text TestText;
 
     [SerializeField, Range(1f, 10f)]
     private float waveHeight = 5f;
@@ -13,12 +15,34 @@ public class WaveText : MonoBehaviour
 
     readonly int maxCharacterIndex = 4;
 
-    private void Start()
+    private CancellationTokenSource cts;
+
+    private async void Start()
     {
-        TestText = GetComponent<TextMeshProUGUI>();
+        TestText = GetComponent<TMP_Text>();
+        cts = new CancellationTokenSource();
+
+        try
+        {
+            await AnimateCharactersAsync(cts.Token);
+        }
+        catch (TaskCanceledException)
+        {
+            Debug.LogWarning("Animation task was canceled.");
+        }
     }
 
-    void Update()
+    private async Task AnimateCharactersAsync(CancellationToken cancellationToken)
+    {
+        while(!cancellationToken.IsCancellationRequested)
+        {
+            UpdateMeshVertices_Wave();
+            await Task.Yield();
+        }
+
+    }
+
+    void UpdateMeshVertices_Wave()
     {
         TestText.ForceMeshUpdate();
         var textInfo = TestText.textInfo;
@@ -45,5 +69,12 @@ public class WaveText : MonoBehaviour
             meshInfo.mesh.vertices = meshInfo.vertices;
             TestText.UpdateGeometry(meshInfo.mesh, meshNum);
         }
+    }
+
+    private void OnDisable()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
     }
 }

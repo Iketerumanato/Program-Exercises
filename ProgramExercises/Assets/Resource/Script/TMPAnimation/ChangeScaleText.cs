@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using System.Threading.Tasks;
+using System.Threading;
 
 public class ChangeScaleText : MonoBehaviour
 {
@@ -9,21 +11,43 @@ public class ChangeScaleText : MonoBehaviour
     private Vector3 initialScale;
     readonly private float defaultScale = 1f;
 
-    void Start()
+    private CancellationTokenSource cts;
+
+    private async void Start()
     {
         TestText = GetComponent<TMP_Text>();
+        cts = new CancellationTokenSource();
         initialScale = TestText.transform.localScale;
+
+        try
+        {
+            await AnimateCharactersAsync(cts.Token);
+        }
+        catch (TaskCanceledException)
+        {
+            Debug.LogWarning("Animation task was canceled.");
+        }
     }
 
-    //テキストの拡大縮小
-    private void Update()
+    private async Task AnimateCharactersAsync(CancellationToken cancellationToken)
     {
-        ScalingText();
+        while (!cancellationToken.IsCancellationRequested)
+        {
+            ScalingText();
+            await Task.Yield();
+        }
     }
 
     void ScalingText()
     {
         float scaleFactor = defaultScale + Mathf.Sin(Time.time * scaleDuration) * scaleAmplitude;
         TestText.transform.localScale = initialScale * scaleFactor;
+    }
+
+    private void OnDisable()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
     }
 }

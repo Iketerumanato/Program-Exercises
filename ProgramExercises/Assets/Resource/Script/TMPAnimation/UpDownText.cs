@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Threading.Tasks;
+using System.Threading;
 
 public class UpDownText : MonoBehaviour
 {
@@ -14,12 +16,34 @@ public class UpDownText : MonoBehaviour
     readonly int maxCharacterIndex = 4;
     readonly int characterSpeed = 1;
 
-    private void Start()
+    private CancellationTokenSource cts;
+
+    private async void Start()
     {
         TestText = GetComponent<TextMeshProUGUI>();
+
+        cts = new CancellationTokenSource();
+
+        try
+        {
+            await AnimateCharactersAsync(cts.Token);
+        }
+        catch (TaskCanceledException)
+        {
+            Debug.LogWarning("Animation task was canceled.");
+        }
     }
 
-    void Update()
+    private async Task AnimateCharactersAsync(CancellationToken cancellationToken)
+    {
+        while (!cancellationToken.IsCancellationRequested)
+        {
+            UpdateMeshVertices_UpDown();
+            await Task.Yield();
+        }
+    }
+
+    private void UpdateMeshVertices_UpDown()
     {
         TestText.ForceMeshUpdate();
         var textInfo = TestText.textInfo;
@@ -49,5 +73,12 @@ public class UpDownText : MonoBehaviour
             meshInfo.mesh.vertices = meshInfo.vertices;
             TestText.UpdateGeometry(meshInfo.mesh, meshNum);
         }
+    }
+
+    private void OnDisable()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
     }
 }
