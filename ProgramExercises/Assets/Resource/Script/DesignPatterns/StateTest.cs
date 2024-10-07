@@ -117,7 +117,7 @@ public class StateTest : MonoBehaviour
         if (currentState != null) currentState.ExitState(this);
         currentState = newState;
         currentState.EnterState(this);
-        currentState.UpdateProcess(this);
+        currentState.UpdateProcess(this);//本当はUpdateなどで記述するが他のLogが呼ばれているかちゃんと見れないためここで呼び出し
     }
 
     void UsageSkill()
