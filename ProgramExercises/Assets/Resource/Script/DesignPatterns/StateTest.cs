@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public interface IPlayerState
@@ -55,7 +56,7 @@ public class AttackState : IPlayerState
     public void UpdateProcess(StateTest stateTest)
     {
         Debug.Log("プレイヤー攻撃中...");
-        Debug.LogWarning("※別クラスでの定義を推奨");
+        Debug.LogWarning("※このステートでの毎フレーム処理は別クラスでの定義を推奨");
     }
 
     public void ActivationSkill(StateTest stateTest)
@@ -93,12 +94,13 @@ public class DefenseState : IPlayerState
 public class StateTest : MonoBehaviour
 {
     private IPlayerState currentState;
+    [SerializeField] TMP_Text PlayerStateText;
 
     // Start is called before the first frame update
     void Start()
     {
         ChangeState(new NormalState());
-        Debug.LogWarning("毎フレームの処理も同時に呼び出すように");
+        PlayerStateText.text = "Normal";
     }
 
     // Update is called once per frame
@@ -134,16 +136,19 @@ public class StateTest : MonoBehaviour
     public void TransferNormalState()
     {
         ChangeState(new NormalState());
-    }
+        PlayerStateText.text = "Normal";
+;   }
 
     public void TransferAttackState()
     {
         ChangeState(new AttackState());
+        PlayerStateText.text = "Attack";
     }
 
     public void TransferDefenseState()
     {
         ChangeState(new DefenseState());
+        PlayerStateText.text = "Defense";
     }
     #endregion
 }
