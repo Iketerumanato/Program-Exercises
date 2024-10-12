@@ -22,7 +22,6 @@ public class RatateCharaText : MonoBehaviour
     private class CharacterRotationState
     {
         public float currentAngle = 0f;
-        public bool isRotating = true;
     }
 
     private async void Start()
@@ -68,7 +67,7 @@ public class RatateCharaText : MonoBehaviour
             for (int charastateNum = 0; charastateNum < charStates.Count; charastateNum++)
             {
                 charStates[charastateNum].currentAngle += rotateSpeed * deltaTime;
-                if (charStates[charastateNum].currentAngle > Circumference)
+                if (charStates[charastateNum].currentAngle >= Circumference)
                 {
                     charStates[charastateNum].currentAngle -= Circumference;
                 }
@@ -95,13 +94,17 @@ public class RatateCharaText : MonoBehaviour
 
             Vector3 center = (verts[charInfo.vertexIndex] + verts[charInfo.vertexIndex + 2]) / 2;
 
-            Matrix4x4 rotationMatrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, charStates[charaNum].currentAngle), Vector3.one);
+            #region 回転行列一覧
+            Matrix4x4 rotationMatrix_X = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(charStates[charaNum].currentAngle, 0f, 0f), Vector3.one);
+            /*Matrix4x4 rotationMatrix_Y = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, charStates[charaNum].currentAngle, 0f), Vector3.one);
+            Matrix4x4 rotationMatrix_Z = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, charStates[charaNum].currentAngle), Vector3.one);*/
+            #endregion
 
             for (int charaindexNum = 0; charaindexNum < maxCharacterIndex; charaindexNum++)
             {
                 var orig = verts[charInfo.vertexIndex + charaindexNum];
                 var dir = orig - center;
-                verts[charInfo.vertexIndex + charaindexNum] = center + rotationMatrix.MultiplyVector(dir);
+                verts[charInfo.vertexIndex + charaindexNum] = center + rotationMatrix_X.MultiplyVector(dir);
             }
         }
 
