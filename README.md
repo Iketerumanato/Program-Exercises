@@ -47,6 +47,19 @@ https://github.com/user-attachments/assets/279d6ccd-c12f-441e-8b12-d932ef865e6c
 
 https://github.com/user-attachments/assets/8dd466ae-be4b-411b-a8af-c16cf35ed124
 
+6,State
+
+[StateTest.cs](ProgramExercises/Assets/Resource/Script/DesignPatterns/StateTest.cs)
+
+https://github.com/user-attachments/assets/aaf80791-4767-4e92-a643-5f41f9869af9
+
+7,Command
+
+[CommandTest](ProgramExercises/Assets/Resource/Script/DesignPatterns/CommandTest)
+
+https://github.com/user-attachments/assets/6cda7f03-7bcd-454f-96a8-e7caaaa018b1
+
+
 **03 ObjectPoolの使用**
 
 https://github.com/user-attachments/assets/472a6f9d-5e84-4450-886b-1e5e5d6c15da
