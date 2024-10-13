@@ -2,12 +2,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
-using System.Collections.Generic;
 
 public class EditorWindowTest : EditorWindow
 {
 #if UNITY_EDITOR
-    [MenuItem("EditorWindowTest/オブジェクトをまとめてコピー")]
+    [MenuItem("EditorWindowTest/繧ｪ繝悶ず繧ｧ繧ｯ繝医ｒ縺ｾ縺ｨ繧√※繧ｳ繝斐�ｼ")]
     private static void ShowWindow()
     {
         var window = GetWindow<EditorWindowTest>("UIElements");

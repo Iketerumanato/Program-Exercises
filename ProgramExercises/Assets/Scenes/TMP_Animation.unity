@@ -973,6 +973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 180
   pauseDuration: 1
+  IsRota: 000000
 --- !u!114 &1902144423
 MonoBehaviour:
   m_ObjectHideFlags: 0
