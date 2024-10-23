@@ -22,6 +22,26 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3591d02dc50fccc46974243fb0e5e404
+    m_Address: "Assets/Resource/Data/Sound/\u30C9\u30A2\u3092\u9589\u3081\u308B2.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a4bc67569c7e4f543acdae3e90acdc74
+    m_Address: "Assets/Resource/Data/Sound/\u30E2\u30FC\u30EB\u30B9\u4FE1\u53F7.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7ae21afdafd3654caff2aa7558f7978
+    m_Address: "Assets/Resource/Data/Sound/\u7802\u306E\u4E0A\u3092\u8D70\u308B.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ee01f2b419396744a9aa73e55ff11e4
+    m_Address: "Assets/Resource/Data/Sound/\u91D1\u5C5E\u30D0\u30C3\u30C8\u3067\u6253\u30641.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: fc7392c5772a920499cc3b441b96908e, type: 2}
   m_SchemaSet:
