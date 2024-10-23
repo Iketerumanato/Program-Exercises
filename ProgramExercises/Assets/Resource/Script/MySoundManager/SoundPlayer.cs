@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundPlayer : MonoBehaviour
@@ -14,12 +11,12 @@ public class SoundPlayer : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlaySound(int clipindex)
+    public void PlaySound(int clipNum)
     {
-        if (soundSetting != null && clipindex >= 0 && clipindex < soundSetting.audioClips.Count)
+        if (soundSetting != null && clipNum >= 0 && clipNum < soundSetting.audioClips.Count)
         {
-            AudioClip clip = soundSetting.audioClips[clipindex];
-            float volume = soundSetting.volumes[clipindex];
+            AudioClip clip = soundSetting.audioClips[clipNum];
+            float volume = soundSetting.volumes[clipNum];
 
             audioSource.clip = clip;
             audioSource.volume = volume;
@@ -29,5 +26,15 @@ public class SoundPlayer : MonoBehaviour
         {
             Debug.LogWarning("Invalid AudioClip index or SoundSettings not assigned.");
         }
+    }
+
+    public string GetSoundName(int clipNum)
+    {
+        if (clipNum >= 0 && clipNum < soundSetting.clipNames.Count)
+        {
+            string SoundName = soundSetting.clipNames[clipNum];
+            return SoundName;
+        }
+        else return null;
     }
 }

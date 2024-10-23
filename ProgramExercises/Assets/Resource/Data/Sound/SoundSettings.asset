@@ -17,6 +17,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c7ae21afdafd3654caff2aa7558f7978, type: 3}
   - {fileID: 8300000, guid: 3ee01f2b419396744a9aa73e55ff11e4, type: 3}
   - {fileID: 8300000, guid: a4bc67569c7e4f543acdae3e90acdc74, type: 3}
+  clipNames:
+  - CloseDoor
+  - Run
+  - Hit
+  - Signal
   volumes:
   - 1
   - 1

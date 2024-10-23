@@ -7,6 +7,7 @@ public class MySoundManagerEditor : EditorWindow
 {
     private List<AudioClip> audioClips = new();
     private Dictionary<AudioClip, float> clipVolumes = new();
+    private List<string> clipNames = new();
 
     private string outputPath = "Assets/Resource/Data/Sound/SoundSettings.asset";  // デフォルトの保存パス
 
@@ -30,6 +31,7 @@ public class MySoundManagerEditor : EditorWindow
         if (GUILayout.Button("Add Audio Clip"))
         {
             audioClips.Add(null);
+            clipNames.Add("");
         }
 
         // サウンドクリップリストの描画
@@ -45,6 +47,8 @@ public class MySoundManagerEditor : EditorWindow
                 {
                     clipVolumes[audioClips[clipCount]] = DefaultVolume;
                 }
+
+                clipNames[clipCount] = EditorGUILayout.TextField("Clip Name", clipNames[clipCount]);
 
                 clipVolumes[audioClips[clipCount]] = EditorGUILayout.Slider("Volume", clipVolumes[audioClips[clipCount]], minVolume, DefaultVolume);
             }
@@ -70,17 +74,17 @@ public class MySoundManagerEditor : EditorWindow
         // ScriptableObjectのインスタンスを作成
         SoundSetting newSettings = ScriptableObject.CreateInstance<SoundSetting>();
 
-        // AudioClipとその音量をScriptableObjectに保存
         if (audioClips != null && clipVolumes != null)
         {
-            foreach (var clip in audioClips)
+            for (int clipNum = 0; clipNum < audioClips.Count; clipNum++)
             {
+                var clip = audioClips[clipNum];
                 newSettings.audioClips.Add(clip);
+                newSettings.clipNames.Add(clipNames[clipNum]);
                 newSettings.volumes.Add(clipVolumes.ContainsKey(clip) ? clipVolumes[clip] : DefaultVolume);
             }
         }
 
-        // アセットとして保存
         if (File.Exists(outputPath))
         {
             Debug.LogWarning("File already exists at path: " + outputPath + ". Overwriting existing file.");
@@ -106,6 +110,7 @@ public class MySoundManagerEditor : EditorWindow
             }
 
             audioClips.RemoveAt(clipindex);
+            clipNames.RemoveAt(clipindex);
         }
     }
 }
