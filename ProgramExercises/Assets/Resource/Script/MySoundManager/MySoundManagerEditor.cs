@@ -1,96 +1,109 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.IO;
 
 public class MySoundManagerEditor : EditorWindow
 {
     private List<AudioClip> audioClips = new();
     private Dictionary<AudioClip, float> clipVolumes = new();
 
-    private SoundSetting soundSetting;
+    private string outputPath = "Assets/Resource/Data/Sound/SoundSettings.asset";  // デフォルトの保存パス
 
-    [MenuItem("Window/Sound Manager")]
+    const float DefaultVolume = 1.0f;
+    const float minVolume = 0.0f;
+
     public static void ShowWindow()
     {
-        GetWindow<MySoundManagerEditor>("My Sound Manager");
+        GetWindow<MySoundManagerEditor>("Sound Manager");
     }
 
     private void OnGUI()
     {
         GUILayout.Label("Sound Settings", EditorStyles.boldLabel);
 
-        soundSetting = (SoundSetting)EditorGUILayout.ObjectField("Sound Settings", soundSetting, typeof(SoundSetting), false);
+        // 出力パスの設定
+        outputPath = EditorGUILayout.TextField("Save Path", outputPath);
 
-        if (soundSetting != null)
+        if (GUILayout.Button("Add Audio Clip"))
         {
-            if (GUILayout.Button("Load Settings"))
-            {
-                LoadSettings();
-            }
+            audioClips.Add(null);
+        }
 
-            if (GUILayout.Button("Add Audio Clip"))
-            {
-                audioClips.Add(null);
-            }
+        // サウンドクリップリストの描画
+        for (int clipCount = 0; clipCount < audioClips.Count; clipCount++)
+        {
+            GUILayout.BeginHorizontal();
 
-            for (int i = 0; i < audioClips.Count; i++)
-            {
-                audioClips[i] = (AudioClip)EditorGUILayout.ObjectField("Audio Clip " + (i + 1), audioClips[i], typeof(AudioClip), false);
+            audioClips[clipCount] = (AudioClip)EditorGUILayout.ObjectField("Audio Clip " + (clipCount + 1), audioClips[clipCount], typeof(AudioClip), false);
 
-                if (audioClips[i] != null)
+            if (audioClips[clipCount] != null)
+            {
+                if (!clipVolumes.ContainsKey(audioClips[clipCount]))
                 {
-                    if (!clipVolumes.ContainsKey(audioClips[i]))
-                    {
-                        clipVolumes[audioClips[i]] = 1.0f; // デフォルト音量
-                    }
-
-                    clipVolumes[audioClips[i]] = EditorGUILayout.Slider("Volume", clipVolumes[audioClips[i]], 0.0f, 1.0f);
+                    clipVolumes[audioClips[clipCount]] = DefaultVolume;
                 }
+
+                clipVolumes[audioClips[clipCount]] = EditorGUILayout.Slider("Volume", clipVolumes[audioClips[clipCount]], minVolume, DefaultVolume);
             }
 
-            if (GUILayout.Button("Save Settings"))
+            // 削除ボタン
+            if (GUILayout.Button("Remove", GUILayout.Width(70)))
             {
-                SaveSettings();
+                RemoveClip(clipCount);
             }
+
+            GUILayout.EndHorizontal();
         }
-        else
+
+        if (GUILayout.Button("Save Settings"))
         {
-            EditorGUILayout.HelpBox("Please assign a SoundSettings asset.", MessageType.Warning);
+            SaveSettings();
         }
     }
 
-    private void LoadSettings()
-    {
-        if (soundSetting == null) return;
-
-        audioClips = new List<AudioClip>(soundSetting.audioClips);
-        clipVolumes.Clear();
-
-        for (int i = 0; i < soundSetting.audioClips.Count; i++)
-        {
-            clipVolumes[soundSetting.audioClips[i]] = soundSetting.volumes[i];
-        }
-    }
-
+    // 設定の保存とScriptableObjectの生成
     private void SaveSettings()
     {
-        if (soundSetting == null) return;
+        // ScriptableObjectのインスタンスを作成
+        SoundSetting newSettings = ScriptableObject.CreateInstance<SoundSetting>();
 
-        // AudioClipリストと音量リストをクリア
-        soundSetting.audioClips.Clear();
-        soundSetting.volumes.Clear();
-
-        // 現在の設定をScriptableObjectに保存
-        foreach (var clip in audioClips)
+        // AudioClipとその音量をScriptableObjectに保存
+        if (audioClips != null && clipVolumes != null)
         {
-            soundSetting.audioClips.Add(clip);
-            soundSetting.volumes.Add(clipVolumes.ContainsKey(clip) ? clipVolumes[clip] : 1.0f);
+            foreach (var clip in audioClips)
+            {
+                newSettings.audioClips.Add(clip);
+                newSettings.volumes.Add(clipVolumes.ContainsKey(clip) ? clipVolumes[clip] : DefaultVolume);
+            }
         }
 
-        // ScriptableObjectの変更を保存
-        EditorUtility.SetDirty(soundSetting);
+        // アセットとして保存
+        if (File.Exists(outputPath))
+        {
+            Debug.LogWarning("File already exists at path: " + outputPath + ". Overwriting existing file.");
+        }
+
+        // ScriptableObjectをアセットとして指定のパスに保存
+        AssetDatabase.CreateAsset(newSettings, outputPath);
         AssetDatabase.SaveAssets();
 
-        Debug.Log("Settings Saved");
+        Debug.Log("Settings saved to ScriptableObject at: " + outputPath);
+    }
+
+    // クリップの削除処理
+    private void RemoveClip(int clipindex)
+    {
+        if (clipindex >= 0 && clipindex < audioClips.Count)
+        {
+            AudioClip clip = audioClips[clipindex];
+
+            if (clip != null && clipVolumes.ContainsKey(clip))
+            {
+                clipVolumes.Remove(clip);
+            }
+
+            audioClips.RemoveAt(clipindex);
+        }
     }
 }
