@@ -9,12 +9,14 @@ public class MySoundManagerEditor : EditorWindow
     private List<string> clipNames = new();
     private Dictionary<AudioClip, float> clipVolumes = new();
     private Dictionary<AudioClip, float> clipPiths = new();
+    private Dictionary<AudioClip, bool> clipLoops = new();
 
     private string outputPath = "Assets/Resource/Data/Sound/SoundSettings.asset";  // デフォルトの保存パス
 
     const float DefaultValue = 1.0f;
     const float minValue = 0.0f;
     const float maxPichs = 3.0f;
+    const bool DefaultBool = false;
 
     [MenuItem("Window/My Sound Editor")]
     public static void ShowWindow()
@@ -49,11 +51,13 @@ public class MySoundManagerEditor : EditorWindow
                 {
                     clipVolumes[audioClips[clipCount]] = DefaultValue;
                     clipPiths[audioClips[clipCount]] = DefaultValue;
+                    clipLoops[audioClips[clipCount]] = DefaultBool;
                 }
 
                 clipNames[clipCount] = EditorGUILayout.TextField("Clip Name", clipNames[clipCount]);
                 clipVolumes[audioClips[clipCount]] = EditorGUILayout.Slider("Volume", clipVolumes[audioClips[clipCount]], minValue, DefaultValue);
                 clipPiths[audioClips[clipCount]] = EditorGUILayout.Slider("Pitch", clipPiths[audioClips[clipCount]], minValue, maxPichs);
+                clipLoops[audioClips[clipCount]] = EditorGUILayout.Toggle("Loop", clipLoops[audioClips[clipCount]]);
             }
 
             // 削除ボタン
@@ -86,6 +90,7 @@ public class MySoundManagerEditor : EditorWindow
                 newSettings.clipNames.Add(clipNames[clipNum]);
                 newSettings.volumes.Add(clipVolumes.ContainsKey(clip) ? clipVolumes[clip] : DefaultValue);
                 newSettings.pitchs.Add(clipPiths.ContainsKey(clip) ? clipPiths[clip] : DefaultValue);
+                newSettings.isloops.Add(clipLoops.ContainsKey(clip) ? clipLoops[clip] : DefaultBool);
             }
         }
 
@@ -112,6 +117,7 @@ public class MySoundManagerEditor : EditorWindow
             {
                 clipVolumes.Remove(clip);
                 clipPiths.Remove(clip);
+                clipLoops.Remove(clip);
             }
             audioClips.RemoveAt(clipindex);
             clipNames.RemoveAt(clipindex);

@@ -5,9 +5,8 @@ public class SoundButton : MonoBehaviour
 {
     [SerializeField] Button soundButton;
     [SerializeField] SoundPlayer soundPlayer;
-
-    [Header("セットしたSoundSettingsのClipと同じ数に")]
-    [SerializeField] int clipNum = 0;
+    [SerializeField,Header("セットしたSoundSettingsのClipと同じ数に")]
+    int clipNum = 0;
 
     public void PlaySoundInclipIndex()
     {

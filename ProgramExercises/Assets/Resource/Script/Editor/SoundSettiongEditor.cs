@@ -8,6 +8,7 @@ public class SoundSettiongEditor : Editor
     const float minValue = 0.0f;
     const float maxPitch = 3.0f;
     const float SpaceHeight = 10f;
+    const bool DefaultIsBool = false;
 
     public override void OnInspectorGUI()
     {
@@ -23,12 +24,27 @@ public class SoundSettiongEditor : Editor
 
             soundSetting.pitchs[clipCount] = EditorGUILayout.Slider("Pitch", soundSetting.pitchs[clipCount], minValue, maxPitch);
 
+            soundSetting.isloops[clipCount] = EditorGUILayout.Toggle("Loop", soundSetting.isloops[clipCount]);
+
+            if (GUILayout.Button("Remove Clip")) soundSetting.RemoveClip(clipCount);
+
             GUILayout.Space(SpaceHeight);
+        }
+
+        if(GUILayout.Button("Add New Clip"))
+        {
+            AddDummyClip(soundSetting);
         }
 
         if (GUI.changed)
         {
             EditorUtility.SetDirty(soundSetting);
         }
+    }
+
+    private void AddDummyClip(SoundSetting soundSetting)
+    {
+        AudioClip newClip = null; // ここに実際のクリップを代入するか、エディタで選択する処理を追加する
+        soundSetting.AddClip(newClip, "New Clip", DefaultValue, DefaultValue, DefaultIsBool);
     }
 }

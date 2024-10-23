@@ -7,15 +7,17 @@ public class SoundPlayer : MonoBehaviour
 
     public void PlaySound(int clipNum)
     {
-        if (soundSetting != null && clipNum < soundSetting.audioClips.Count)
+        if (clipNum < soundSetting.audioClips.Count)
         {
             AudioClip clip = soundSetting.audioClips[clipNum];
             float volume = soundSetting.volumes[clipNum];
             float pitch = soundSetting.pitchs[clipNum];
+            bool isloop = soundSetting.isloops[clipNum];
 
             audioSource.clip = clip;
             audioSource.volume = volume;
             audioSource.pitch = pitch;
+            audioSource.loop = isloop;
             audioSource.Play();
         }
         else Debug.LogWarning("Invalid AudioClip index or SoundSettings not assigned.");
@@ -23,7 +25,7 @@ public class SoundPlayer : MonoBehaviour
 
     public string GetSoundName(int clipNum)
     {
-        if (clipNum >= 0 && clipNum < soundSetting.clipNames.Count)
+        if (clipNum < soundSetting.clipNames.Count)
         {
             string SoundName = soundSetting.clipNames[clipNum];
             return SoundName;
