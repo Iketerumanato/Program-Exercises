@@ -133,5 +133,15 @@ https://github.com/user-attachments/assets/3eb247ea-8ab0-4b14-bf73-a786a8692f73
 
 https://github.com/user-attachments/assets/1e6df58f-26c2-4173-9340-d32d9b453506
 
+**07 AudioClipの別々の設定ができないなと感じ、サウンドのエディター拡張**
+
+[MySoundManagerEditor.cs](ProgramExercises/Assets/Resource/Script/Editor/MySoundManagerEditor.cs)
+
+[MySoundManager](ProgramExercises/Assets/Resource/Script/MySoundManager)
+
+[動画](https://youtu.be/ZsRM6C0OSkQ)
+
+![ProgramExercises - SoundTest - Windows, Mac, Linux - Unity 2023 2 0f1 _DX11_ 2024_10_24 6_45_29](https://github.com/user-attachments/assets/a833d0a3-ad6b-4e2c-8c4c-ce5270eaeddf)
+
 
 思いついたら追加予定
