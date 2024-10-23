@@ -13,9 +13,11 @@ public class MySoundManagerEditor : EditorWindow
     const float DefaultVolume = 1.0f;
     const float minVolume = 0.0f;
 
+    [MenuItem("Window/My Sound Editor")]
     public static void ShowWindow()
     {
-        GetWindow<MySoundManagerEditor>("Sound Manager");
+        var window = GetWindow<MySoundManagerEditor>("My Sound Editor");
+        window.minSize = new Vector2(700, 300);
     }
 
     private void OnGUI()
