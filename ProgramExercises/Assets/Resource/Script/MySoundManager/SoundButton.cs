@@ -7,11 +7,11 @@ public class SoundButton : MonoBehaviour
     [SerializeField] SoundPlayer soundPlayer;
 
     [Header("セットしたSoundSettingsのClipと同じ数に")]
-    [SerializeField] int clipIndex = 0;
+    [SerializeField] int clipNum = 0;
 
     public void PlaySoundInclipIndex()
     {
-        soundButton.onClick.AddListener(() => soundPlayer.PlaySound(clipIndex));
-        Debug.Log($"Play Sound is : " + soundPlayer.GetSoundName(clipIndex));
+        soundButton.onClick.AddListener(() => soundPlayer.PlaySound(clipNum));
+        Debug.Log($"Play Sound is : " + soundPlayer.GetSoundName(clipNum));
     }
 }

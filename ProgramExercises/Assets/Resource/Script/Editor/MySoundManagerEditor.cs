@@ -6,13 +6,15 @@ using System.IO;
 public class MySoundManagerEditor : EditorWindow
 {
     private List<AudioClip> audioClips = new();
-    private Dictionary<AudioClip, float> clipVolumes = new();
     private List<string> clipNames = new();
+    private Dictionary<AudioClip, float> clipVolumes = new();
+    private Dictionary<AudioClip, float> clipPiths = new();
 
     private string outputPath = "Assets/Resource/Data/Sound/SoundSettings.asset";  // デフォルトの保存パス
 
-    const float DefaultVolume = 1.0f;
-    const float minVolume = 0.0f;
+    const float DefaultValue = 1.0f;
+    const float minValue = 0.0f;
+    const float maxPichs = 3.0f;
 
     [MenuItem("Window/My Sound Editor")]
     public static void ShowWindow()
@@ -45,12 +47,13 @@ public class MySoundManagerEditor : EditorWindow
             {
                 if (!clipVolumes.ContainsKey(audioClips[clipCount]))
                 {
-                    clipVolumes[audioClips[clipCount]] = DefaultVolume;
+                    clipVolumes[audioClips[clipCount]] = DefaultValue;
+                    clipPiths[audioClips[clipCount]] = DefaultValue;
                 }
 
                 clipNames[clipCount] = EditorGUILayout.TextField("Clip Name", clipNames[clipCount]);
-
-                clipVolumes[audioClips[clipCount]] = EditorGUILayout.Slider("Volume", clipVolumes[audioClips[clipCount]], minVolume, DefaultVolume);
+                clipVolumes[audioClips[clipCount]] = EditorGUILayout.Slider("Volume", clipVolumes[audioClips[clipCount]], minValue, DefaultValue);
+                clipPiths[audioClips[clipCount]] = EditorGUILayout.Slider("Pitch", clipPiths[audioClips[clipCount]], minValue, maxPichs);
             }
 
             // 削除ボタン
@@ -74,14 +77,15 @@ public class MySoundManagerEditor : EditorWindow
         // ScriptableObjectのインスタンスを作成
         SoundSetting newSettings = ScriptableObject.CreateInstance<SoundSetting>();
 
-        if (audioClips != null && clipVolumes != null)
+        if (audioClips != null)
         {
             for (int clipNum = 0; clipNum < audioClips.Count; clipNum++)
             {
                 var clip = audioClips[clipNum];
                 newSettings.audioClips.Add(clip);
                 newSettings.clipNames.Add(clipNames[clipNum]);
-                newSettings.volumes.Add(clipVolumes.ContainsKey(clip) ? clipVolumes[clip] : DefaultVolume);
+                newSettings.volumes.Add(clipVolumes.ContainsKey(clip) ? clipVolumes[clip] : DefaultValue);
+                newSettings.pitchs.Add(clipPiths.ContainsKey(clip) ? clipPiths[clip] : DefaultValue);
             }
         }
 
@@ -104,11 +108,11 @@ public class MySoundManagerEditor : EditorWindow
         {
             AudioClip clip = audioClips[clipindex];
 
-            if (clip != null && clipVolumes.ContainsKey(clip))
+            if (clipVolumes.ContainsKey(clip))
             {
                 clipVolumes.Remove(clip);
+                clipPiths.Remove(clip);
             }
-
             audioClips.RemoveAt(clipindex);
             clipNames.RemoveAt(clipindex);
         }
