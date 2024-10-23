@@ -33,18 +33,13 @@ public class SoundSettiongEditor : Editor
 
         if(GUILayout.Button("Add New Clip"))
         {
-            AddDummyClip(soundSetting);
+            AudioClip newClip = null;
+            soundSetting.AddClip(newClip, "New Clip", DefaultValue, DefaultValue, DefaultIsBool);
         }
 
         if (GUI.changed)
         {
             EditorUtility.SetDirty(soundSetting);
         }
-    }
-
-    private void AddDummyClip(SoundSetting soundSetting)
-    {
-        AudioClip newClip = null; // ここに実際のクリップを代入するか、エディタで選択する処理を追加する
-        soundSetting.AddClip(newClip, "New Clip", DefaultValue, DefaultValue, DefaultIsBool);
     }
 }
