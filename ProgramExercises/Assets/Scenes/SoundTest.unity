@@ -1698,7 +1698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundButton: {fileID: 1742736531}
   soundPlayer: {fileID: 1566857894}
-  clipNum: 4
+  clipNum: 3
 --- !u!114 &1742736531
 MonoBehaviour:
   m_ObjectHideFlags: 0
