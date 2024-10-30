@@ -5,111 +5,126 @@ using UnityEngine.UI;
 
 public class AnimationScoreText : MonoBehaviour
 {
-    [SerializeField] private bool autoIncrement = false;
-    [SerializeField] private int incrementAmount = 1;
-    [SerializeField] private Image[] digitImages;
+    [SerializeField] private RectTransform[] digitImages;
+    [SerializeField] private Texture numberTexture;
     [SerializeField] private int score;
     [SerializeField] private float animationTime = 0.5f;
-    [SerializeField] private float digitHeight = 50f; // 1つの数字の高さ
-    [SerializeField] private Sprite numberSprite; // 数字のスプライトシート
+    [SerializeField] private float digitHeight = 32f;
+    [SerializeField] private float delayBetweenDigits = 0.1f;
 
-    private int previousValue;
-    private bool isAnimating;
-    private int[] digits;
+    [Header("Auto Increment Settings")]
+    [SerializeField] private bool enableAutoIncrement = true;
+    [SerializeField] private int incrementAmount = 1;
+    [SerializeField] private float updateInterval = 1.0f;
+
+    private Vector2[] initialPositions;
+    private int previousScore;
+    private Sequence currentAnimation;
+    private float updateTimer;
+
+    const float maxScoreImageHeight = 352f;
 
     private void Start()
     {
-        DOTween.SetTweensCapacity(500, 50);
-        SetupDigitImages();
-        UpdateScoreDisplay(true);
+        score = 0;
+        initialPositions = new Vector2[digitImages.Length];
+        for (int digitNum = 0; digitNum < digitImages.Length; digitNum++)
+        {
+            initialPositions[digitNum] = digitImages[digitNum].anchoredPosition;
+        }
+        UpdateScoreDisplay(score);
+
+        updateTimer = updateInterval;
     }
 
     private void Update()
     {
-        if (autoIncrement)
+        if (enableAutoIncrement)
         {
-            AddScore(incrementAmount);
-        }
-    }
-
-    private void SetupDigitImages()
-    {
-        foreach (var image in digitImages)
-        {
-            image.sprite = numberSprite;
-            image.type = Image.Type.Tiled;
-            image.rectTransform.sizeDelta = new Vector2(digitHeight, digitHeight * 10);
-        }
-    }
-
-    public void AddScore(int additionalValue)
-    {
-        if (additionalValue == 0) return;
-
-        if (isAnimating)
-        {
-            DOTween.Kill(this);
-        }
-
-        previousValue = score;
-        score += additionalValue;
-        PlayDigitsAnim();
-    }
-
-    private void PlayDigitsAnim()
-    {
-        isAnimating = true;
-        digits = GetAllDigits(score);
-
-        Sequence sequence = DOTween.Sequence();
-
-        for (int i = 0; i < digitImages.Length; i++)
-        {
-            int fromDigit = GetAllDigits(previousValue)[i];
-            int toDigit = digits[i];
-            int difference = (toDigit - fromDigit + 10) % 10;
-
-            sequence.Join(digitImages[i].rectTransform
-                .DOAnchorPosY(-difference * digitHeight, animationTime)
-                .SetEase(Ease.OutQuad)
-                .OnComplete(() => ResetDigitPosition(digitImages[i])));
-        }
-
-        sequence.OnComplete(() =>
-        {
-            isAnimating = false;
-            UpdateScoreDisplay(false);
-        });
-    }
-
-    private void ResetDigitPosition(Image digitImage)
-    {
-        Vector2 currentPos = digitImage.rectTransform.anchoredPosition;
-        digitImage.rectTransform.anchoredPosition = new Vector2(currentPos.x, 0);
-    }
-
-    private void UpdateScoreDisplay(bool immediate)
-    {
-        digits = GetAllDigits(score);
-        for (int i = 0; i < digitImages.Length; i++)
-        {
-            int digit = (i < digits.Length) ? digits[digitImages.Length - 1 - i] : 0;
-            if (immediate)
+            updateTimer -= Time.deltaTime;
+            if (updateTimer <= 0)
             {
-                digitImages[i].rectTransform.anchoredPosition = new Vector2(0, 0);
+                UpdateScore(score + incrementAmount);
+                updateTimer = updateInterval;
+                Debug.Log($"Current Score: {score}");
             }
-            digitImages[i].rectTransform.localPosition = new Vector3(digitImages[i].rectTransform.localPosition.x, -digit * digitHeight, 0);
         }
     }
 
-    private int[] GetAllDigits(int number)
+    public void UpdateScore(int newScore)
     {
-        int[] result = new int[6];
-        for (int i = 0; i < 6; i++)
+        // 現在のアニメーションがあれば停止し、再利用を防ぐ
+        if (currentAnimation != null && currentAnimation.IsActive() && currentAnimation.IsPlaying())
         {
-            result[i] = number % 10;
-            number /= 10;
+            currentAnimation.Kill();
         }
+
+        previousScore = score;
+        score = newScore;
+        PlaySlotAnimation();
+    }
+
+    private void PlaySlotAnimation()
+    {
+        int[] newDigits = GetDigits(score);
+        int[] oldDigits = GetDigits(previousScore);
+
+        currentAnimation = DOTween.Sequence();
+
+        for (int i = 0; i < digitImages.Length; i++)
+        {
+            int fromDigit = oldDigits[i];
+            int toDigit = newDigits[i];
+
+            if (fromDigit != toDigit)
+            {
+                RectTransform rectTransform = digitImages[i];
+                float endY = initialPositions[i].y + toDigit * digitHeight;
+
+                // 行がスムーズに0から9まで動き、9の次は0に戻る
+                if (toDigit < fromDigit)
+                {
+                    // 9から0に戻る場合、一度上へ移動し、次の桁へ
+                    currentAnimation.Append(rectTransform.DOAnchorPosY(endY + 10 * digitHeight, animationTime).SetEase(Ease.OutQuad));
+                    currentAnimation.Append(rectTransform.DOAnchorPosY(endY, 0f));
+                }
+                else
+                {
+                    // 数字が進む場合、上へ移動
+                    currentAnimation.Append(rectTransform.DOAnchorPosY(endY, animationTime).SetEase(Ease.OutQuad));
+                }
+
+                float delay = i * delayBetweenDigits;
+                currentAnimation.Insert(delay, rectTransform.DOAnchorPosY(endY, animationTime).SetEase(Ease.OutQuad));
+            }
+        }
+    }
+
+    private int[] GetDigits(int number)
+    {
+        int[] result = new int[digitImages.Length];
+        string numberStr = number.ToString().PadLeft(digitImages.Length, '0');
+
+        for (int digitNum = 0; digitNum < digitImages.Length; digitNum++)
+        {
+            result[digitNum] = int.Parse(numberStr[numberStr.Length - 1 - digitNum].ToString());
+        }
+
         return result;
+    }
+
+    private void UpdateScoreDisplay(int score)
+    {
+        int[] digits = GetDigits(score);
+
+        for (int digitNun = 0; digitNun < digitImages.Length; digitNun++)
+        {
+            RawImage image = digitImages[digitNun].GetComponent<RawImage>();
+            if (image != null)
+            {
+                int digit = digits[digitNun];
+                image.uvRect = new Rect(0, 1 - (digit + 1) * (digitHeight / maxScoreImageHeight), 1, digitHeight / maxScoreImageHeight);
+            }
+        }
     }
 }
