@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
 
@@ -10,10 +9,10 @@ public class AnimationScoreText : MonoBehaviour
     [SerializeField] private float animationTime = 0.5f;
     [SerializeField] private float digitHeight = 32f;
     [SerializeField] private float delayBetweenDigits = 0.1f;
-    [SerializeField] private int score;
+    [SerializeField] private int Score;
     private int previousScore;
-    private Sequence currentAnimation;
-    private Vector2[] initialPositions;
+    private Sequence CountUpAnimation;
+    private Vector2[] digitsInitialPositions;
 
     [SerializeField] DisplayScoreHitory displayScoreHitory;
 
@@ -21,17 +20,17 @@ public class AnimationScoreText : MonoBehaviour
     {
         SetupDigitImages();
         StoreInitialPositions();
-        previousScore = score;
+        previousScore = Score;
         UpdateScoreDisplay();
     }
 
     private void Update()
     {
         // Inspectorでscoreを変更した時のみアニメーションを更新
-        if (score != previousScore)
+        if (Score != previousScore)
         {
             UpdateScoreDisplay();
-            previousScore = score;
+            previousScore = Score;
         }
     }
 
@@ -45,25 +44,25 @@ public class AnimationScoreText : MonoBehaviour
 
     private void StoreInitialPositions()
     {
-        initialPositions = new Vector2[digitImages.Length];
+        digitsInitialPositions = new Vector2[digitImages.Length];
         for (int digitsCnt = 0; digitsCnt < digitImages.Length; digitsCnt++)
         {
-            initialPositions[digitsCnt] = digitImages[digitsCnt].anchoredPosition;
+            digitsInitialPositions[digitsCnt] = digitImages[digitsCnt].anchoredPosition;
         }
     }
 
     private void UpdateScoreDisplay()
     {
-        if (currentAnimation != null && currentAnimation.IsActive())
+        if (CountUpAnimation != null && CountUpAnimation.IsActive())
         {
-            currentAnimation.Kill();
+            CountUpAnimation.Kill();
         }
 
-        int scoreDifference = score - previousScore;
+        int scoreDifference = Score - previousScore;
         if (scoreDifference != 0 && displayScoreHitory != null) displayScoreHitory.AddScoreHistory(scoreDifference);
 
-        int[] digits = GetDigits(score);
-        currentAnimation = DOTween.Sequence();
+        int[] digits = GetAllDigits(Score);
+        CountUpAnimation = DOTween.Sequence();
 
         for (int digitsCnt = 0; digitsCnt < digitImages.Length; digitsCnt++)
         {
@@ -71,17 +70,17 @@ public class AnimationScoreText : MonoBehaviour
             int targetDigit = digits[digitsCnt];
 
             // 現在の位置を基準に、ターゲットの位置を計算
-            Vector2 targetPosition = initialPositions[digitsCnt] + new Vector2(0, targetDigit * digitHeight);
+            Vector2 targetPosition = digitsInitialPositions[digitsCnt] + new Vector2(0, targetDigit * digitHeight);
 
             // 各桁のアニメーションを設定
             float delay = digitsCnt * delayBetweenDigits;
-            currentAnimation.Insert(delay, rectTransform.DOAnchorPosY(targetPosition.y, animationTime).SetEase(Ease.OutQuad));
+            CountUpAnimation.Insert(delay, rectTransform.DOAnchorPosY(targetPosition.y, animationTime).SetEase(Ease.OutQuad));
         }
 
-        currentAnimation.Play();
+        CountUpAnimation.Play();
     }
 
-    private int[] GetDigits(int number)
+    private int[] GetAllDigits(int number)
     {
         int[] result = new int[digitImages.Length];
         string numberStr = number.ToString().PadLeft(digitImages.Length, '0');

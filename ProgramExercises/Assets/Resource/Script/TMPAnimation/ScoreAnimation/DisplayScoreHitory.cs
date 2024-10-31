@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 public class DisplayScoreHitory : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI historyPrefab;  // 履歴を表示するテキストのプレハブ
-    [SerializeField] private Transform historyContainer;     // 履歴の表示場所
-    [SerializeField] private int maxHistoryCount = 3;        // 表示する履歴の最大数
-    [SerializeField] private float historyDuration = 3f;     // 各履歴を表示する時間
-    [SerializeField] private float verticalSpacing = 30f;    // 履歴間の垂直スペース
+    [SerializeField] private TextMeshProUGUI historyPrefab;
+    [SerializeField] private Transform historyContainer;// 履歴の表示場所
+    [SerializeField] private int maxHistoryCount = 3;
+    [SerializeField] private float historyDuration = 3f;
+    [SerializeField] private float verticalSpacing = 30f;
 
     private List<TextMeshProUGUI> historyList = new List<TextMeshProUGUI>();
 
@@ -18,11 +18,10 @@ public class DisplayScoreHitory : MonoBehaviour
     public void AddScoreHistory(int changeAmount)
     {
         // スコア変動のテキストを設定
-        string text = changeAmount > 0 ? $"+{changeAmount}" : changeAmount.ToString();
+        string HistoryText = changeAmount > 0 ? $"+{changeAmount}" : changeAmount.ToString();
 
-        // 新しい履歴テキストを生成
         TextMeshProUGUI newHistory = Instantiate(historyPrefab, historyContainer);
-        newHistory.text = text;
+        newHistory.text = HistoryText;
         newHistory.transform.SetAsFirstSibling(); // 最新の履歴が上に表示されるようにする
 
         // リストに新しい履歴を追加し、アニメーション処理を実行
@@ -47,13 +46,13 @@ public class DisplayScoreHitory : MonoBehaviour
     // 全ての履歴テキストを再配置するメソッド
     private void RepositionHistoryTexts()
     {
-        for (int i = 0; i < historyList.Count; i++)
+        for (int historyListIndex = 0; historyListIndex < historyList.Count; historyListIndex++)
         {
-            if (historyList[i] != null) // オブジェクトが存在するか確認
+            if (historyList[historyListIndex] != null) // オブジェクトが存在するか確認
             {
                 // DOTweenで座標を下にスライド
-                historyList[i].rectTransform.DOKill(); // 既存のアニメーションを中断
-                historyList[i].rectTransform.DOAnchorPosY(-i * verticalSpacing, 0.3f);
+                historyList[historyListIndex].rectTransform.DOKill(); // 既存のアニメーションを中断
+                historyList[historyListIndex].rectTransform.DOAnchorPosY(-historyListIndex * verticalSpacing, 0.3f);
             }
         }
     }
