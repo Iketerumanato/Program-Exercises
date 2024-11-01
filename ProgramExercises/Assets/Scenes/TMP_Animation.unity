@@ -200,7 +200,7 @@ MonoBehaviour:
   historyContainer: {fileID: 174617034}
   maxHistoryCount: 3
   historyDuration: 6
-  verticalSpacing: 48
+  verticalSpacing: 50
   scaleDecreaseFactor: 0.8
 --- !u!1 &517558367
 GameObject:
