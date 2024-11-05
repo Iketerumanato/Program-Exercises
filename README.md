@@ -145,4 +145,7 @@ https://github.com/user-attachments/assets/3eb247ea-8ab0-4b14-bf73-a786a8692f73
 
 https://github.com/user-attachments/assets/1e6df58f-26c2-4173-9340-d32d9b453506
 
+6,Dotweenを用いてのスコアのカウントアップ
+
+
 思いついたら追加予定
