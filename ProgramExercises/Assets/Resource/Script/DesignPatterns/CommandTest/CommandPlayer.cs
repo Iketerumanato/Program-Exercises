@@ -1,10 +1,8 @@
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
-public class CommandPlayert : MonoBehaviour
+public class CommandPlayer : MonoBehaviour
 {
     [SerializeField] CommandTest _commandTest;
-    private float moveInput;
 
     // Update is called once per frame
     void Update()

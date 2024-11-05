@@ -59,6 +59,11 @@ public class CommandTest : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpForce = 5f;
     [SerializeField] Rigidbody2D playerRig2D;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] float groundCheckRadius = 0.1f;
+    [SerializeField] LayerMask groundLayer;
+    private bool wasGrounded;
+    [SerializeField]  ShakeEffect shakeEffect;
 
     public void ExecuteCommand(ICommand command)
     {
@@ -83,6 +88,30 @@ public class CommandTest : MonoBehaviour
 
     public void Jump()
     {
-        playerRig2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if (IsGrounded())
+        {
+            playerRig2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) != null;
+    }
+
+    private void Update()
+    {
+        bool isGrounded = IsGrounded();
+
+        if (!wasGrounded && isGrounded)
+        {
+            //画面揺れver
+            shakeEffect.StartShake(shakeEffect.shakeScreenIntensity, shakeEffect.shakeScreenDuration);
+
+            //カメラ揺れver
+            //shakeEffect.CameraShaker();
+        }
+
+        wasGrounded = isGrounded;
     }
 }
