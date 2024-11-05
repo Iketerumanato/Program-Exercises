@@ -1,0 +1,389 @@
+fileFormatVersion: 2
+guid: 8fc702ca20e101e4e9a8457c76fdbc8a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8166469503631056378
+    second: ScoreSheet1029_0
+  - first:
+      213: -8356862392687738515
+    second: ScoreSheet1029_1
+  - first:
+      213: 2295672801849248380
+    second: ScoreSheet1029_2
+  - first:
+      213: -903905096813612020
+    second: ScoreSheet1029_3
+  - first:
+      213: 3258110191189543161
+    second: ScoreSheet1029_4
+  - first:
+      213: 5814394060069948574
+    second: ScoreSheet1029_5
+  - first:
+      213: 6905590975328343743
+    second: ScoreSheet1029_6
+  - first:
+      213: 821906705893920776
+    second: ScoreSheet1029_7
+  - first:
+      213: 3230317060420465143
+    second: ScoreSheet1029_8
+  - first:
+      213: 1401990855448945455
+    second: ScoreSheet1029_9
+  - first:
+      213: 6607843892705000250
+    second: ScoreSheet1029_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ScoreSheet1029_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 320
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 602a207114fdaae80800000000000000
+      internalID: -8166469503631056378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_1
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 289
+        width: 10
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d61c60f2ee5760c80800000000000000
+      internalID: -8356862392687738515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_2
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 257
+        width: 15
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7a00c2104edbdf10800000000000000
+      internalID: 2295672801849248380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_3
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 225
+        width: 14
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0472c18a1fa473f0800000000000000
+      internalID: -903905096813612020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_4
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 193
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f8cee8e4f1273d20800000000000000
+      internalID: 3258110191189543161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_5
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 161
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9c4c967790e0b050800000000000000
+      internalID: 5814394060069948574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_6
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 129
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb6d698976695df50800000000000000
+      internalID: 6905590975328343743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_7
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 97
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 800915b5bcff76b00800000000000000
+      internalID: 821906705893920776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_8
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 65
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f1fe32604464dc20800000000000000
+      internalID: 3230317060420465143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_9
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 34
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f236165414fd47310800000000000000
+      internalID: 1401990855448945455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScoreSheet1029_10
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 2
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3b7ae3b207c3bb50800000000000000
+      internalID: 6607843892705000250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      ScoreSheet1029_0: -8166469503631056378
+      ScoreSheet1029_1: -8356862392687738515
+      ScoreSheet1029_10: 6607843892705000250
+      ScoreSheet1029_2: 2295672801849248380
+      ScoreSheet1029_3: -903905096813612020
+      ScoreSheet1029_4: 3258110191189543161
+      ScoreSheet1029_5: 5814394060069948574
+      ScoreSheet1029_6: 6905590975328343743
+      ScoreSheet1029_7: 821906705893920776
+      ScoreSheet1029_8: 3230317060420465143
+      ScoreSheet1029_9: 1401990855448945455
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
