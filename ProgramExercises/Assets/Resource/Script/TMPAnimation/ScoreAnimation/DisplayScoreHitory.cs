@@ -48,17 +48,17 @@ public class DisplayScoreHitory : MonoBehaviour
     // 全ての履歴テキストを再配置し、サイズをアニメーションで変更するメソッド
     private void RepositionAndResizeHistoryTexts()
     {
-        for (int i = 0; i < historyList.Count; i++)
+        for (int historyNum = 0; historyNum < historyList.Count; historyNum++)
         {
-            if (historyList[i] != null) // オブジェクトが存在するか確認
+            if (historyList[historyNum] != null) // オブジェクトが存在するか確認
             {
                 // DOTweenで座標を下にスライド
-                historyList[i].rectTransform.DOKill(); // 既存のアニメーションを中断
-                historyList[i].rectTransform.DOAnchorPosY(-i * verticalSpacing, 0.3f);
+                historyList[historyNum].rectTransform.DOKill(); // 既存のアニメーションを中断
+                historyList[historyNum].rectTransform.DOAnchorPosY(-historyNum * verticalSpacing, 0.3f);
 
                 // DOTweenでサイズを変更
-                float scale = Mathf.Pow(scaleDecreaseFactor, i); // インデックスに応じて小さくする
-                historyList[i].rectTransform.DOScale(scale, 0.3f);
+                float scale = Mathf.Pow(scaleDecreaseFactor, historyNum); // インデックスに応じて小さくする
+                historyList[historyNum].rectTransform.DOScale(scale, 0.3f);
             }
         }
     }

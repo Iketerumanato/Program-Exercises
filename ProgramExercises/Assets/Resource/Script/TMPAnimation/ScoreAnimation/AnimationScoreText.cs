@@ -16,7 +16,7 @@ public class AnimationScoreText : MonoBehaviour
 
     [SerializeField] DisplayScoreHitory displayScoreHitory;
 
-    private void Start()
+    private void Awake()
     {
         SetupDigitImages();
         StoreInitialPositions();
