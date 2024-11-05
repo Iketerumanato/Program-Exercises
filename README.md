@@ -147,5 +147,10 @@ https://github.com/user-attachments/assets/1e6df58f-26c2-4173-9340-d32d9b453506
 
 6,Dotweenを用いてのスコアのカウントアップ
 
+[AnimationScoreText.cs](ProgramExercises/Assets/Resource/Script/TMPAnimation/ScoreAnimation/AnimationScoreText.cs)
+
+[DisplayScoreHitory.cs](ProgramExercises/Assets/Resource/Script/TMPAnimation/ScoreAnimation/DisplayScoreHitory.cs)
+
+https://github.com/user-attachments/assets/77634e6d-cbde-4c65-b9c3-6f4df0ecf036
 
 思いついたら追加予定
