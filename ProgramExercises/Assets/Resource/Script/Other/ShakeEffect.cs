@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class ShakeEffect : MonoBehaviour
 {
+    [Header("true = CameraShake, false = ScreenShake")]
+    public bool ShakeType = true;
+
     [SerializeField] Transform mainCameraTransform;
     [SerializeField] Vector3 cameraPositionStrength;
     [SerializeField] Vector3 cameraRotationStrength;
@@ -28,7 +31,7 @@ public class ShakeEffect : MonoBehaviour
         Graphics.Blit(src, dest, screenShakeMaterial);
     }
 
-    public void StartShake(float intensity, float duration)
+    public void ScreenShaker(float intensity, float duration)
     {
         shakeIntensity = intensity;
         Invoke(nameof(StopShake), duration);

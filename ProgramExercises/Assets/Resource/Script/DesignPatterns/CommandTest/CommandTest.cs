@@ -125,8 +125,8 @@ public class CommandTest : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) != null;
-        //return Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+        //return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) != null;
+        return Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
     private void Update()
@@ -135,11 +135,8 @@ public class CommandTest : MonoBehaviour
 
         if (!wasGrounded && isGrounded)
         {
-            //画面揺れver
-            //shakeEffect.StartShake(shakeEffect.shakeScreenIntensity, shakeEffect.shakeScreenDuration);
-
-            //カメラ揺れver
-            shakeEffect.CameraShaker();
+            if(!shakeEffect.ShakeType) shakeEffect.ScreenShaker(shakeEffect.shakeScreenIntensity, shakeEffect.shakeScreenDuration);
+            else shakeEffect.CameraShaker();
         }
 
         wasGrounded = isGrounded;

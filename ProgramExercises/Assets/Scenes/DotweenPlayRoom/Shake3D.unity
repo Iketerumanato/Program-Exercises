@@ -662,12 +662,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bbd2ab2c0d7384ab60e8417d1157eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShakeType: 1
   mainCameraTransform: {fileID: 1605483766}
   cameraPositionStrength: {x: 1, y: 1, z: 1}
-  cameraRotationStrength: {x: 0.2, y: 0.2, z: 0.2}
+  cameraRotationStrength: {x: 1, y: 1, z: 1}
   screenShakeMaterial: {fileID: 2100000, guid: c6e73ac3a8f566a43a91884ed1b630f9, type: 2}
-  shakeScreenDuration: 2
-  shakeScreenIntensity: 2
+  shakeScreenDuration: 1
+  shakeScreenIntensity: 1
 --- !u!1 &1643656093
 GameObject:
   m_ObjectHideFlags: 0
