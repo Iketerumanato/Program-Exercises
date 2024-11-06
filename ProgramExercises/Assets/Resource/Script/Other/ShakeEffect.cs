@@ -20,14 +20,7 @@ public class ShakeEffect : MonoBehaviour
 
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
-        if (shakeIntensity > 0f)
-        {
-            screenShakeMaterial.SetFloat(ShakeSetFloatStr, shakeIntensity);
-        }
-        else
-        {
-            screenShakeMaterial.SetFloat(ShakeSetFloatStr, 0f);
-        }
+        screenShakeMaterial.SetFloat(ShakeSetFloatStr, shakeIntensity > 0f ? shakeIntensity : 0f);
         Graphics.Blit(src, dest, screenShakeMaterial);
     }
 
