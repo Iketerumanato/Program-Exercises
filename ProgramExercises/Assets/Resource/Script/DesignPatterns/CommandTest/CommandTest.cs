@@ -7,12 +7,12 @@ public interface ICommand
     void Undo();
 }
 
-public class MoveCmd : ICommand
+public class MoveCmd2D : ICommand
 {
     private CommandTest _commandTest;
     private float moveDistance;
 
-    public MoveCmd(CommandTest character, float moveDistance)
+    public MoveCmd2D(CommandTest character, float moveDistance)
     {
         this._commandTest = character;
         this.moveDistance = moveDistance;
@@ -21,13 +21,35 @@ public class MoveCmd : ICommand
     //コマンドの実行
     public void Execute()
     {
-        _commandTest.MoveHorizontal(moveDistance);
+        _commandTest.PlayerMove2D(moveDistance);
     }
 
     //コマンドの取り消し(元の位置に戻す)
     public void Undo()
     {
-        _commandTest.MoveHorizontal(-moveDistance);
+        _commandTest.PlayerMove2D(-moveDistance);
+    }
+}
+
+public class MoveCmd3D : ICommand
+{
+    private CommandTest _commandTest;
+    private Vector3 moveDirection;
+
+    public MoveCmd3D(CommandTest commandTest, Vector3 moveDirection)
+    {
+        this._commandTest = commandTest;
+        this.moveDirection = moveDirection;
+    }
+
+    public void Execute()
+    {
+        _commandTest.PlayerMove3D(moveDirection);
+    }
+
+    public void Undo()
+    {
+        _commandTest.PlayerMove3D(-moveDirection);
     }
 }
 
@@ -59,11 +81,12 @@ public class CommandTest : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpForce = 5f;
     [SerializeField] Rigidbody2D playerRig2D;
+    [SerializeField] Rigidbody playerRig;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius = 0.1f;
     [SerializeField] LayerMask groundLayer;
     private bool wasGrounded;
-    [SerializeField]  ShakeEffect shakeEffect;
+    [SerializeField] ShakeEffect shakeEffect;
 
     public void ExecuteCommand(ICommand command)
     {
@@ -81,9 +104,14 @@ public class CommandTest : MonoBehaviour
         }
     }
 
-    public void MoveHorizontal(float moveInput)
+    public void PlayerMove2D(float moveInput)
     {
         playerRig2D.velocity = new Vector2(moveInput * moveSpeed, playerRig2D.velocity.y);
+    }
+
+    public void PlayerMove3D(Vector3 moveDirection)
+    {
+        playerRig.velocity = new Vector3(moveDirection.x * moveSpeed, playerRig.velocity.y, moveDirection.z * moveSpeed);
     }
 
     public void Jump()
@@ -91,12 +119,14 @@ public class CommandTest : MonoBehaviour
         if (IsGrounded())
         {
             playerRig2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            playerRig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) != null;
+        //return Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
     private void Update()
@@ -106,10 +136,10 @@ public class CommandTest : MonoBehaviour
         if (!wasGrounded && isGrounded)
         {
             //画面揺れver
-            shakeEffect.StartShake(shakeEffect.shakeScreenIntensity, shakeEffect.shakeScreenDuration);
+            //shakeEffect.StartShake(shakeEffect.shakeScreenIntensity, shakeEffect.shakeScreenDuration);
 
             //カメラ揺れver
-            //shakeEffect.CameraShaker();
+            shakeEffect.CameraShaker();
         }
 
         wasGrounded = isGrounded;
