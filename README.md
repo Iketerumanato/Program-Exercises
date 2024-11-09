@@ -6,18 +6,18 @@
 
 [RESUMEのURL](https://www.resume.id/works/86287d2425f9e8b3)
 
-[エディタ拡張をしたい](Explanations/Editor-Expansion.md)
+[エディタ拡張をしたい](Editor-Expansion.md)
 
-[デザインパターンでできること](Explanations/Designpatterns.md)
+[デザインパターンでできること](Designpatterns.md)
 
-[ObjectPoolを使ってみよう](Explanations/ObjectPool.md)
+[ObjectPoolを使ってみよう](ObjectPool.md)
 
-[モールス信号(コマンド入力)](Explanations/MorseCode.md)
+[モールス信号(コマンド入力)](MorseCode.md)
 
-[addressableを使ってみよう](Explanations/Addressable.md)
+[addressableを使ってみよう](Addressable.md)
 
-[TextMeshProをアニメーションさせたい](Explanations/TMPAnimation.md)
+[TextMeshProをアニメーションさせたい](TMPAnimation.md)
 
-[Dotweenを使ってみよう](Explanations/UseDotween.md)
+[Dotweenを使ってみよう](UseDotween.md)
 
 思いついたら追加予定
