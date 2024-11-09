@@ -1,5 +1,7 @@
 # デザインパターンでできること
 
+**Coming soon...**
+
 7,Command
 
 [CommandTest](ProgramExercises/Assets/Resource/Script/DesignPatterns/CommandTest)
@@ -41,5 +43,3 @@ https://github.com/user-attachments/assets/279d6ccd-c12f-441e-8b12-d932ef865e6c
 [SingletonTest.cs](ProgramExercises/Assets/Resource/Script/DesignPatterns/SingletonTest.cs)
 
 ![ProgramExercises - SampleScene - Windows, Mac, Linux - Unity 2023 2 0f1_ _DX11_ 2024_09_20 5_33_34](https://github.com/user-attachments/assets/75aa4d0d-261a-46b3-88ae-ba280a8c63e0)
-
-**Coming soon...**
