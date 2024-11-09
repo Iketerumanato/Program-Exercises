@@ -7,71 +7,78 @@ public interface ICommand
     void Undo();
 }
 
-public class MoveCmd2D : ICommand
+public abstract class MoveCommand : ICommand
 {
-    private CommandTest _commandTest;
-    private float moveDistance;
+    protected CommandTest commandTest;
+    protected Vector3 moveDirection;
 
-    public MoveCmd2D(CommandTest character, float moveDistance)
+    public MoveCommand(CommandTest commandTest, Vector3 moveDirection)
     {
-        this._commandTest = character;
-        this.moveDistance = moveDistance;
-    }
-
-    //コマンドの実行
-    public void Execute()
-    {
-        _commandTest.PlayerMove2D(moveDistance);
-    }
-
-    //コマンドの取り消し(元の位置に戻す)
-    public void Undo()
-    {
-        _commandTest.PlayerMove2D(-moveDistance);
-    }
-}
-
-public class MoveCmd3D : ICommand
-{
-    private CommandTest _commandTest;
-    private Vector3 moveDirection;
-
-    public MoveCmd3D(CommandTest commandTest, Vector3 moveDirection)
-    {
-        this._commandTest = commandTest;
+        this.commandTest = commandTest;
         this.moveDirection = moveDirection;
     }
 
-    public void Execute()
-    {
-        _commandTest.PlayerMove3D(moveDirection);
-    }
+    public abstract void Execute();
 
     public void Undo()
     {
-        _commandTest.PlayerMove3D(-moveDirection);
+        ExecuteMove(-moveDirection);
+    }
+
+    protected abstract void ExecuteMove(Vector3 direction);
+}
+
+public class MoveCmd2D : MoveCommand
+{
+    public MoveCmd2D(CommandTest commandTest, float moveDistance)
+        : base(commandTest, new Vector2(moveDistance, 0)) { }
+
+    public override void Execute()
+    {
+        ExecuteMove(moveDirection);
+    }
+
+    protected override void ExecuteMove(Vector3 direction)
+    {
+        commandTest.PlayerMove2D(direction.x);
+    }
+}
+
+public class MoveCmd3D : MoveCommand
+{
+    public MoveCmd3D(CommandTest commandTest, Vector3 moveDirection)
+        : base(commandTest, moveDirection) { }
+
+    public override void Execute()
+    {
+        ExecuteMove(moveDirection);
+    }
+
+    protected override void ExecuteMove(Vector3 direction)
+    {
+        commandTest.PlayerMove3D(direction);
     }
 }
 
 public class JumpCmd : ICommand
 {
-    private CommandTest _commandTest;
+    private CommandTest commandTest;
     private Vector2 originalPosition;
 
-    public JumpCmd(CommandTest _commandTest)
+    public JumpCmd(CommandTest commandTest)
     {
-        this._commandTest = _commandTest;
-        originalPosition = _commandTest.transform.position;
+        this.commandTest = commandTest;
+        originalPosition = commandTest.transform.position;
     }
 
     public void Execute()
     {
-        _commandTest.Jump();
+        commandTest.Jump();
     }
 
     public void Undo()
     {
-        _commandTest.transform.position = originalPosition;
+        commandTest.transform.position = originalPosition;
     }
 }
 
@@ -82,10 +89,11 @@ public class CommandTest : MonoBehaviour
     [SerializeField] float jumpForce = 5f;
     [SerializeField] Rigidbody2D playerRig2D;
     [SerializeField] Rigidbody playerRig;
-    [SerializeField] Transform groundCheck;
+    [SerializeField] Transform groundCheckObj;
     [SerializeField] float groundCheckRadius = 0.1f;
     [SerializeField] LayerMask groundLayer;
-    private bool wasGrounded;
+    private bool wasGrounded2d;
+    private bool wasGrounded3d;
     [SerializeField] ShakeEffect shakeEffect;
 
     public void ExecuteCommand(ICommand command)
@@ -116,29 +124,45 @@ public class CommandTest : MonoBehaviour
 
     public void Jump()
     {
-        if (IsGrounded())
-        {
-            playerRig2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            playerRig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
+        if (IsGrounded3D()) playerRig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if (IsGround2D()) playerRig2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    private bool IsGrounded()
+    private bool IsGrounded3D()
     {
-        //return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) != null;
-        return Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+        return Physics.CheckSphere(groundCheckObj.position, groundCheckRadius, groundLayer);
+    }
+
+    private bool IsGround2D()
+    {
+        return Physics2D.OverlapCircle(groundCheckObj.position, groundCheckRadius, groundLayer) != null;
     }
 
     private void Update()
     {
-        bool isGrounded = IsGrounded();
+        bool isGrounded3d = IsGrounded3D();
+        bool isGrounded2d = IsGround2D();
 
-        if (!wasGrounded && isGrounded)
+        if (!wasGrounded2d && isGrounded2d)
         {
-            if(!shakeEffect.ShakeType) shakeEffect.ScreenShaker(shakeEffect.shakeScreenIntensity, shakeEffect.shakeScreenDuration);
-            else shakeEffect.CameraShaker();
+            TriggerShakeEffect();
         }
 
-        wasGrounded = isGrounded;
+        if (!wasGrounded3d && isGrounded3d)
+        {
+            TriggerShakeEffect();
+        }
+
+        wasGrounded2d = isGrounded2d;
+        wasGrounded3d = isGrounded3d;
+    }
+
+    private void TriggerShakeEffect()
+    {
+        if (shakeEffect.isScreenShake)
+            shakeEffect.ScreenShaker(shakeEffect.shakeScreenIntensity, shakeEffect.shakeScreenDuration);
+
+        if (shakeEffect.isCameraShake)
+            shakeEffect.CameraShaker();
     }
 }

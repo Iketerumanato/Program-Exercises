@@ -9,17 +9,17 @@ public class CommandPlayer : MonoBehaviour
     {
 
         #region 2D移動
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    ICommand moveLeft = new MoveCmd2D(_commandTest, -1f);
-        //    _commandTest.ExecuteCommand(moveLeft);
-        //}
+        if (Input.GetKey(KeyCode.A))
+        {
+            ICommand moveLeft = new MoveCmd2D(_commandTest, -1f);
+            _commandTest.ExecuteCommand(moveLeft);
+        }
 
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    ICommand moveRight = new MoveCmd2D(_commandTest, 1f);
-        //    _commandTest.ExecuteCommand(moveRight);
-        //}
+        if (Input.GetKey(KeyCode.D))
+        {
+            ICommand moveRight = new MoveCmd2D(_commandTest, 1f);
+            _commandTest.ExecuteCommand(moveRight);
+        }
         #endregion
 
         #region 3D移動

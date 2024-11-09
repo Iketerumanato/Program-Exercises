@@ -3,18 +3,19 @@ using UnityEngine;
 
 public class ShakeEffect : MonoBehaviour
 {
-    [Header("true = CameraShake, false = ScreenShake")]
-    public bool ShakeType = true;
+    public bool isCameraShake= false;
+    public bool isScreenShake = false;
 
+    [Header("Camera Shake Setting")]
     [SerializeField] Transform mainCameraTransform;
     [SerializeField] Vector3 cameraPositionStrength;
     [SerializeField] Vector3 cameraRotationStrength;
     private float shakecameraDuration = 0.3f;
 
+    [Header("Screen Shake Setting")]
     [SerializeField] Material screenShakeMaterial;
     private float shakeIntensity = 0f;
     readonly string ShakeSetFloatStr = "_ShakeIntensity";
-
     public float shakeScreenDuration = 0.6f;
     public float shakeScreenIntensity = 0.6f;
 
