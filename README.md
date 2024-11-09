@@ -6,15 +6,11 @@
 
 [RESUMEのURL](https://www.resume.id/works/86287d2425f9e8b3)
 
-[エディタ拡張](Editor-Expansion.md)
+[エディタ拡張](Explanations/Editor-Expansion.md)
 
-[デザインパターンでできること](Designpatterns.md)
+[デザインパターンでできること](Explanations/Designpatterns.md)
 
-**03 ObjectPoolの使用**
-
-https://github.com/user-attachments/assets/472a6f9d-5e84-4450-886b-1e5e5d6c15da
-
-[参考URL](https://huchat-gamedev.net/explanation-object-pool/)
+[ObjectPoolを使ってみよう](Explanations/ObjectPool.md)
 
 **04 モールス信号**
 
